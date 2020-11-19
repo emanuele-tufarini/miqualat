@@ -1,8 +1,8 @@
 
 ## Table of Contents <br>
-1. [INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE](#INTRODUCTION-TO-MIQUALAT-NOTEBOOK-AND-DATABASE)
-2. [MIQUALAT NOTEBOOK DESCRIPTION AND USE](#MIQUALAT-NOTEBOOK-DESCRIPTION-AND-USE)
-2. [MIQUALAT NOTEBOOK DESCRIPTION AND USE2](#MIQUALAT-NOTEBOOK-DESCRIPTION-AND-USE2)
+1. [INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE](#introduction-to-miqualat-notebook-and-database)
+2. [MIQUALAT NOTEBOOK DESCRIPTION AND USE](#miqualat-notebook-description-and-use)
+2. [MIQUALAT NOTEBOOK DESCRIPTION AND USE2](#miqualat-notebook-description-and-uses)
 ### INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE <br>
 ***
 With Miqualat Notebook you have access to an easy-to-use Jupyter Notebook interface. <br> 
@@ -39,7 +39,7 @@ Creates ENS_PATH_ID.csv (Ensembl gene id to Kegg pathways id) in the OUTPUT fold
 Allows the import of files processed with previous notebooks, once checked. <br>
 Import data into the database only when you are sure. <br>
 ***
-### MIQUALAT NOTEBOOK DESCRIPTION AND USE2 <br>
+### MIQUALAT NOTEBOOK DESCRIPTION AND USES <br>
 ***
 To use notebooks select the code cell and click on run, below will describe the notebooks and their functions. <br>
 Five notebooks have been built, that allow you to search, import and check into the miqualat database. <br>
