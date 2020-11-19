@@ -1,4 +1,7 @@
-## INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE <br>
+
+## Table of Contents <br>
+1. [INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE](#INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE) <br>
+### INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE <br>
 
 With Miqualat Notebook you have access to an easy-to-use Jupyter Notebook interface. <br>
 You can use this notebook for save your data from publications, genes, variants, tecnique and other and associate them with descriptions and tags. <br>
@@ -7,9 +10,6 @@ You can get this data from different databases as pubmed, ensembl, kegg and make
 This relational database allows you to link and export information from different tables. <br>
 You can set your database anywhere, on a local or remote machine. <br>
 It does not require large computing resources. <br>
-## Table of Contents <br>
-1. [General Info](#general-info) <br>
-### General Info <br>
 ***
 
 
