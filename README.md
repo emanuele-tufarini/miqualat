@@ -7,7 +7,10 @@ You can get this data from different databases as pubmed, ensembl, kegg and make
 This relational database allows you to link and export information from different tables. <br>
 You can set your database anywhere, on a local or remote machine. <br>
 It does not require large computing resources. <br>
-
+## Table of Contents <br>
+1. [General Info](#general-info) <br>
+### General Info <br>
+***
 
 
 
