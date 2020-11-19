@@ -13,7 +13,7 @@ You can set your database anywhere, on a local or remote machine. <br>
 It does not require large computing resources. <br>
 ***
 ### MIQUALAT NOTEBOOK DESCRIPTION AND USE <br>
-
+***
 To use notebooks select the code cell and click on run, below will describe the notebooks and their functions. <br>
 Five notebooks have been built, that allow you to search, import and check into the miqualat database. <br>
 1) MIQUALAT_PUBLICATION_data_assess.ipynb <br>
@@ -37,7 +37,7 @@ Creates ENS_PATH_ID.csv (Ensembl gene id to Kegg pathways id) in the OUTPUT fold
 5) MIQUALAT_data_import_and_check.ipynb  <br>
 Allows the import of files processed with previous notebooks, once checked. <br>
 Import data into the database only when you are sure. <br>
-
+***
 
 <br>
 <br>
