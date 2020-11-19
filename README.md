@@ -2,7 +2,7 @@
 ## Table of Contents <br>
 1. [INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE](#INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE) <br>
 ### INTRODUCTION TO MIQUALAT NOTEBOOK AND DATABASE <br>
-
+***
 With Miqualat Notebook you have access to an easy-to-use Jupyter Notebook interface. <br>
 You can use this notebook for save your data from publications, genes, variants, tecnique and other and associate them with descriptions and tags. <br>
 A control system has been implemented to maintain flexibility and freedom to import data while maintaining control over them. <br>
