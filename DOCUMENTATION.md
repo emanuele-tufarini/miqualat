@@ -23,9 +23,8 @@ A control system has been implemented to maintain flexibility and freedom to imp
 You can get this data from different databases as pubmed, ensembl, kegg and make automatically links. <br>
 This relational database allows you to link and export information from different tables. <br>
 
-
 ### INSTALL JUPYTER NOTEBOOK
-
+***
 Update and upgrade your system (recommended). <br> 
 $ sudo apt update && sudo apt upgrade <br> <br> 
 Install python3-pip. <br> 
@@ -40,49 +39,49 @@ Run jupyter notebook (on port 8888 by default). <br>
 $ jupyter-notebook <br><br> 
 
 ___________________________________________________________________________
-INSTALL MYSQL SERVER
+### INSTALL MYSQL SERVER
+***
+Install apache2 and mysql-server. <br> 
 
-Install apache2 and mysql-server.
+$ sudo apt install apache2 <br> <br> 
 
-$ sudo apt install apache2
+$ sudo apt install mysql-server <br> <br> 
 
-$ sudo apt install mysql-server
+If you have a raspberry or similar system use this command to install mysql-server <br> 
 
-If you have a raspberry or similar system use this command to install mysql-server
+$ sudo apt install mariadb-server-10.0 <br> <br> 
 
-$ sudo apt install mariadb-server-10.0
+Create user and set password for database (this user can be used to access in phpmyadmin, keep your credentials). <br> 
 
-Create user and set password for database (this user can be used to access in phpmyadmin, keep your credentials).
+$ sudo mysql -u root <br> <br> 
 
-$ sudo mysql -u root
+$ CREATE USER 'user'@'localhost' IDENTIFIED BY 'password'; <br> <br> 
 
-$ CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
+Grant privileges on all databases <br> <br> 
 
-Grant privileges on all databases 
+$ GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost'; <br> <br> 
 
-$ GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';
+Grant privileges on one databases (safer) <br>  
 
-Grant privileges on one databases (safer)
+$ GRANT ALL PRIVILEGES ON DATABASE. * TO 'user'@'localhost'; <br> <br> 
 
-$ GRANT ALL PRIVILEGES ON DATABASE. * TO 'user'@'localhost';
+$ FLUSH PRIVILEGES; <br> <br> 
 
-$ FLUSH PRIVILEGES;
+!! IMPORTANT (pay attention before continuing with the command below) When you install phpmyadmin (command below) after select apache2 (with TAB) and press SPACE, after leave all empty (press ENTER) !! <br> 
 
-!! IMPORTANT (pay attention before continuing with the command below) When you install phpmyadmin (command below) after select apache2 (with TAB) and press SPACE, after leave all empty (press ENTER) !!
+$ sudo apt install phpmyadmin <br> <br> 
 
-$ sudo apt install phpmyadmin 
+$ sudo systemctl restart apache2 <br> <br> 
 
-$ sudo systemctl restart apache2
+Connect phpmyadmin using your browser (on port 80: /phpmyadmin). <br> 
 
-Connect phpmyadmin using your browser (on port 80: /phpmyadmin).
+http://server_ip(ex 192.168.0...)/phpmyadmin <br> <br> 
 
-http://server_ip(ex 192.168.0...)/phpmyadmin
+Show your ip. <br> 
 
-Show your ip.
+$ hostname -I <br> <br> 
 
-$ hostname -I
-
-http://localhost/phpmyadmin (work only on local computer not for remote server)
+http://localhost/phpmyadmin (work only on local computer not for remote server) <br> 
 
 ___________________________________________________________________________
 INSTALL MYSQLCLIENT
