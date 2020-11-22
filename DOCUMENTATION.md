@@ -42,45 +42,25 @@ ___________________________________________________________________________
 ### INSTALL MYSQL SERVER
 ***
 Install apache2 and mysql-server. <br> 
-
-$ sudo apt install apache2 <br> <br> 
-
+$ sudo apt install apache2 <br>
 $ sudo apt install mysql-server <br> <br> 
-
 If you have a raspberry or similar system use this command to install mysql-server <br> 
-
 $ sudo apt install mariadb-server-10.0 <br> <br> 
-
 Create user and set password for database (this user can be used to access in phpmyadmin, keep your credentials). <br> 
-
 $ sudo mysql -u root <br> <br> 
-
 $ CREATE USER 'user'@'localhost' IDENTIFIED BY 'password'; <br> <br> 
-
-Grant privileges on all databases <br> <br> 
-
+Grant privileges on all databases <br> 
 $ GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost'; <br> <br> 
-
 Grant privileges on one databases (safer) <br>  
-
-$ GRANT ALL PRIVILEGES ON DATABASE. * TO 'user'@'localhost'; <br> <br> 
-
+$ GRANT ALL PRIVILEGES ON DATABASE. * TO 'user'@'localhost'; <br>
 $ FLUSH PRIVILEGES; <br> <br> 
-
 !! IMPORTANT (pay attention before continuing with the command below) When you install phpmyadmin (command below) after select apache2 (with TAB) and press SPACE, after leave all empty (press ENTER) !! <br> 
-
-$ sudo apt install phpmyadmin <br> <br> 
-
+$ sudo apt install phpmyadmin <br>
 $ sudo systemctl restart apache2 <br> <br> 
-
 Connect phpmyadmin using your browser (on port 80: /phpmyadmin). <br> 
-
 http://server_ip(ex 192.168.0...)/phpmyadmin <br> <br> 
-
 Show your ip. <br> 
-
 $ hostname -I <br> <br> 
-
 http://localhost/phpmyadmin (work only on local computer not for remote server) <br> 
 
 ___________________________________________________________________________
