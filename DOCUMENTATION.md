@@ -51,7 +51,7 @@ $ sudo mysql -u root <br> <br>
 $ CREATE USER 'user'@'localhost' IDENTIFIED BY 'password'; <br> <br> 
 Grant privileges on all databases. <br> 
 $ GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost'; <br> <br> 
-Grant privileges on one databases (safer). <br>  
+Grant privileges on one databases (safer). <br>
 $ GRANT ALL PRIVILEGES ON DATABASE. * TO 'user'@'localhost'; <br>
 $ FLUSH PRIVILEGES; <br> <br> 
 !! IMPORTANT (pay attention before continuing with the command below) !! <br>
