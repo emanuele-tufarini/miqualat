@@ -35,6 +35,6 @@ An error control system prevents the import of incorrect information, but import
 ***
 Click on the link to view the complete documentation. <br>
 
-https://github.com/emanuele-tufarini/miqualat/blob/main/DOCUMENTATION.md <br>
+https://github.com/emanuele-tufarini/miqualat/blob/main/DOCUMENTATION.pdf <br>
 
 Authors: Marco Milanesi, Danilo Pignotti, Emanuele Tufarini <br>
