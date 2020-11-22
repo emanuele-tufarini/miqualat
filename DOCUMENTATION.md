@@ -186,169 +186,165 @@ variant_name,variant_type,chromosome,chromosome_position,allele_reference,altern
 ___________________________________________________________________________
 ### MIQUALAT DATABASE DESCRIPTION
 ***
-##accesso a mysql server in localhost##
-mysql -u danilo -p
-Enter password: 
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 15
-Server version: 8.0.22-0ubuntu0.20.04.2 (Ubuntu)
+Accesso a mysql server in localhost. <br><br>
+mysql -u danilo -p <br>
+Enter password: <br>
+Welcome to the MySQL monitor.  Commands end with ; or \g. <br>
+Your MySQL connection id is 15 <br>
+Server version: 8.0.22-0ubuntu0.20.04.2 (Ubuntu) <br><br>
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved. <br><br>
+Oracle is a registered trademark of Oracle Corporation and/or its <br>
+affiliates. Other names may be trademarks of their respective <br>
+owners. <br><br>
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement. <br><br>
+Importazione del file.sql nel quale è implementato il database. <br><br>
+mysql> source MIQUALAT_create_database_and_tables.sql <br>
+Query OK, 8 rows affected (0.08 sec) <br>
+Query OK, 1 row affected (0.00 sec) <br>
 
-Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+Database changed <br>
+Query OK, 0 rows affected, 2 warnings (0.03 sec) <br>
 
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
+Query OK, 0 rows affected, 2 warnings (0.02 sec) <br>
 
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+Query OK, 0 rows affected, 1 warning (0.02 sec) <br>
 
-##importazione del file.sql nel quale è implementato il database##
-mysql> source MIQUALAT_create_database_and_tables.sql
-Query OK, 8 rows affected (0.08 sec)
+Query OK, 0 rows affected (0.03 sec) <br>
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 0 rows affected (0.02 sec) <br>
 
-Database changed
-Query OK, 0 rows affected, 2 warnings (0.03 sec)
+Query OK, 0 rows affected (0.02 sec) <br>
 
-Query OK, 0 rows affected, 2 warnings (0.02 sec)
+Query OK, 0 rows affected, 1 warning (0.07 sec) <br>
 
-Query OK, 0 rows affected, 1 warning (0.02 sec)
+Query OK, 0 rows affected (0.03 sec) <br><br>
 
-Query OK, 0 rows affected (0.03 sec)
+Utilizzo del database MIQUALAT e visualizzazione delle tabelle. <br><br>
+mysql> use MIQUALAT; <br>
+Database changed <br>
 
-Query OK, 0 rows affected (0.02 sec)
+mysql> SHOW TABLES; <br>
++---------------------+ <br>
+| Tables_in_MIQUALAT  | <br>
++---------------------+ <br>
+| GENE                | <br>
+| GEN_KEGG            | <br>
+| KEGG                | <br>
+| PUBLICATION         | <br>
+| PUB_GEN_VAR_TEC_TAG | <br>
+| TAG                 | <br>
+| TECNIQUE            | <br>
+| VARIANT             | <br>
++---------------------+ <br>
+8 rows in set (0.00 sec) <br><br>
+Descrizione della struttura delle tabelle e del tipo di dato degli attributi di ogni entià e relazione. <br><br>
 
-Query OK, 0 rows affected (0.02 sec)
+mysql> DESCRIBE GENE; <br>
++------------------------+--------------+------+-----+---------+-------+ <br>
+| Field                  | Type         | Null | Key | Default | Extra | <br>
++------------------------+--------------+------+-----+---------+-------+ <br>
+| ensembl_gene_ID        | varchar(20)  | NO   | PRI | NULL    |       | <br>
+| gene_name              | varchar(20)  | YES  |     | NULL    |       | <br>
+| gene_short_description | varchar(300) | YES  |     | NULL    |       | <br>
+| refseq                 | varchar(50)  | NO   |     | NULL    |       | <br>
+| species                | varchar(50)  | NO   |     | NULL    |       | <br>
+| chromosome             | tinyint      | NO   |     | NULL    |       | <br>
+| start_coordinate       | int unsigned | NO   |     | NULL    |       | <br>
+| end_coordinate         | int unsigned | NO   |     | NULL    |       | <br>
+| strand                 | tinyint      | NO   |     | NULL    |       | <br>
++------------------------+--------------+------+-----+---------+-------+ <br>
+9 rows in set (0.00 sec) <br><br>
 
-Query OK, 0 rows affected, 1 warning (0.07 sec)
+mysql> DESCRIBE GEN_KEGG; <br>
++-----------------+-------------+------+-----+---------+-------+ <br>
+| Field           | Type        | Null | Key | Default | Extra | <br>
++-----------------+-------------+------+-----+---------+-------+ <br>
+| ensembl_gene_ID | varchar(20) | NO   | PRI | NULL    |       | <br>
+| kegg_ID         | varchar(20) | NO   | PRI | NULL    |       | <br>
++-----------------+-------------+------+-----+---------+-------+ <br>
+2 rows in set (0.00 sec) <br> <br>
 
-Query OK, 0 rows affected (0.03 sec)
+mysql> DESCRIBE KEGG; <br>
++------------------+--------------+------+-----+---------+-------+ <br>
+| Field            | Type         | Null | Key | Default | Extra | <br>
++------------------+--------------+------+-----+---------+-------+ <br>
+| kegg_ID          | varchar(20)  | NO   | PRI | NULL    |       | <br>
+| kegg_object_type | varchar(30)  | NO   |     | NULL    |       | <br>
+| kegg_object_name | varchar(300) | NO   |     | NULL    |       | <br>
++------------------+--------------+------+-----+---------+-------+ <br>
+3 rows in set (0.00 sec) <br><br>
 
-##utilizzo del database MIQUALAT e visualizzazione delle tabelle##
-mysql> use MIQUALAT;
-Database changed
-mysql> SHOW TABLES;
-+---------------------+
-| Tables_in_MIQUALAT  |
-+---------------------+
-| GENE                |
-| GEN_KEGG            |
-| KEGG                |
-| PUBLICATION         |
-| PUB_GEN_VAR_TEC_TAG |
-| TAG                 |
-| TECNIQUE            |
-| VARIANT             |
-+---------------------+
-8 rows in set (0.00 sec)
+mysql> DESCRIBE PUBLICATION; <br>
++------------------+--------------+------+-----+---------+-------+ <br>
+| Field            | Type         | Null | Key | Default | Extra | <br>
++------------------+--------------+------+-----+---------+-------+ <br>
+| pubmed_ID        | int unsigned | NO   | PRI | NULL    |       | <br>
+| article_title    | varchar(300) | NO   |     | NULL    |       | <br>
+| article_authors  | varchar(300) | NO   |     | NULL    |       | <br>
+| article_journal  | varchar(100) | NO   |     | NULL    |       | <br>
+| publication_year | year         | NO   |     | NULL    |       | <br>
++------------------+--------------+------+-----+---------+-------+ <br>
+5 rows in set (0.01 sec) <br><br>
 
-##descrizione della struttura delle tabelle e del tipo di dato degli attributi di ogni entià e relazione##
-mysql> DESCRIBE GENE;
-+------------------------+--------------+------+-----+---------+-------+
-| Field                  | Type         | Null | Key | Default | Extra |
-+------------------------+--------------+------+-----+---------+-------+
-| ensembl_gene_ID        | varchar(20)  | NO   | PRI | NULL    |       |
-| gene_name              | varchar(20)  | YES  |     | NULL    |       |
-| gene_short_description | varchar(300) | YES  |     | NULL    |       |
-| refseq                 | varchar(50)  | NO   |     | NULL    |       |
-| species                | varchar(50)  | NO   |     | NULL    |       |
-| chromosome             | tinyint      | NO   |     | NULL    |       |
-| start_coordinate       | int unsigned | NO   |     | NULL    |       |
-| end_coordinate         | int unsigned | NO   |     | NULL    |       |
-| strand                 | tinyint      | NO   |     | NULL    |       |
-+------------------------+--------------+------+-----+---------+-------+
-9 rows in set (0.00 sec)
+mysql> DESCRIBE PUB_GEN_VAR_TEC_TAG; <br>
++------------------------+--------------+------+-----+---------+----------------+ <br>
+| Field                  | Type         | Null | Key | Default | Extra          | <br>
++------------------------+--------------+------+-----+---------+----------------+ <br>
+| integer_progressive_ID | int unsigned | NO   | PRI | NULL    | auto_increment | <br>
+| pubmed_ID              | int unsigned | NO   | MUL | NULL    |                | <br>
+| ensembl_gene_ID        | varchar(20)  | YES  | MUL | NULL    |                | <br>
+| variant_name           | varchar(30)  | YES  | MUL | NULL    |                | <br>
+| tecnique               | varchar(50)  | YES  | MUL | NULL    |                | <br>
+| keyword_tags           | varchar(50)  | YES  | MUL | NULL    |                | <br>
+| relationship_note      | varchar(200) | YES  |     | NULL    |                | <br>
++------------------------+--------------+------+-----+---------+----------------+ <br>
+7 rows in set (0.01 sec) <br><br>
 
-mysql> DESCRIBE GEN_KEGG;
-+-----------------+-------------+------+-----+---------+-------+
-| Field           | Type        | Null | Key | Default | Extra |
-+-----------------+-------------+------+-----+---------+-------+
-| ensembl_gene_ID | varchar(20) | NO   | PRI | NULL    |       |
-| kegg_ID         | varchar(20) | NO   | PRI | NULL    |       |
-+-----------------+-------------+------+-----+---------+-------+
-2 rows in set (0.00 sec)
+mysql> DESCRIBE TAG; <br>
++------------------------+--------------+------+-----+---------+-------+ <br>
+| Field                  | Type         | Null | Key | Default | Extra | <br>
++------------------------+--------------+------+-----+---------+-------+ <br>
+| keyword_tags           | varchar(50)  | NO   | PRI | NULL    |       | <br>
+| tags_short_description | varchar(200) | NO   |     | NULL    |       | <br>
++------------------------+--------------+------+-----+---------+-------+ <br>
+2 rows in set (0.01 sec) <br><br>
 
-mysql> DESCRIBE KEGG;
-+------------------+--------------+------+-----+---------+-------+
-| Field            | Type         | Null | Key | Default | Extra |
-+------------------+--------------+------+-----+---------+-------+
-| kegg_ID          | varchar(20)  | NO   | PRI | NULL    |       |
-| kegg_object_type | varchar(30)  | NO   |     | NULL    |       |
-| kegg_object_name | varchar(300) | NO   |     | NULL    |       |
-+------------------+--------------+------+-----+---------+-------+
-3 rows in set (0.00 sec)
+mysql> DESCRIBE TECNIQUE; <br>
++----------------------------+--------------+------+-----+---------+-------+ <br>
+| Field                      | Type         | Null | Key | Default | Extra | <br>
++----------------------------+--------------+------+-----+---------+-------+ <br>
+| tecnique                   | varchar(50)  | NO   | PRI | NULL    |       | <br>
+| tecnique_short_description | varchar(300) | NO   |     | NULL    |       | <br>
++----------------------------+--------------+------+-----+---------+-------+ <br>
+2 rows in set (0.01 sec) <br><br>
 
-mysql> DESCRIBE PUBLICATION;
-+------------------+--------------+------+-----+---------+-------+
-| Field            | Type         | Null | Key | Default | Extra |
-+------------------+--------------+------+-----+---------+-------+
-| pubmed_ID        | int unsigned | NO   | PRI | NULL    |       |
-| article_title    | varchar(300) | NO   |     | NULL    |       |
-| article_authors  | varchar(300) | NO   |     | NULL    |       |
-| article_journal  | varchar(100) | NO   |     | NULL    |       |
-| publication_year | year         | NO   |     | NULL    |       |
-+------------------+--------------+------+-----+---------+-------+
-5 rows in set (0.01 sec)
+mysql> DESCRIBE VARIANT; <br>
++------------------------------+------------------+------+-----+---------+-------+ <br>
+| Field                        | Type             | Null | Key | Default | Extra | <br>
++------------------------------+------------------+------+-----+---------+-------+ <br>
+| variant_name                 | varchar(30)      | NO   | PRI | NULL    |       | <br>
+| variant_type                 | varchar(30)      | NO   |     | NULL    |       | <br>
+| chromosome                   | tinyint unsigned | NO   |     | NULL    |       | <br>
+| chromosome_position          | int unsigned     | NO   |     | NULL    |       | <br>
+| allele_reference             | varchar(50)      | NO   |     | NULL    |       | <br>
+| alternative_allele_reference | varchar(50)      | NO   |     | NULL    |       | <br>
++------------------------------+------------------+------+-----+---------+-------+ <br>
+6 rows in set (0.00 sec) <br><br>
 
-mysql> DESCRIBE PUB_GEN_VAR_TEC_TAG;
-+------------------------+--------------+------+-----+---------+----------------+
-| Field                  | Type         | Null | Key | Default | Extra          |
-+------------------------+--------------+------+-----+---------+----------------+
-| integer_progressive_ID | int unsigned | NO   | PRI | NULL    | auto_increment |
-| pubmed_ID              | int unsigned | NO   | MUL | NULL    |                |
-| ensembl_gene_ID        | varchar(20)  | YES  | MUL | NULL    |                |
-| variant_name           | varchar(30)  | YES  | MUL | NULL    |                |
-| tecnique               | varchar(50)  | YES  | MUL | NULL    |                |
-| keyword_tags           | varchar(50)  | YES  | MUL | NULL    |                |
-| relationship_note      | varchar(200) | YES  |     | NULL    |                |
-+------------------------+--------------+------+-----+---------+----------------+
-7 rows in set (0.01 sec)
+SI TRATTA DI UN DATABASE RELAZIONALE <br>
+*CON 6 TABELLE DI ENTITÀ{ <br>
+											PUBLICATION, <br>
+											GENE, <br>
+											VARIANT, <br>
+											TECNIQUE, <br>
+											TAG, <br>
+											KEGG <br>
+}  <br>
 
-mysql> DESCRIBE TAG;
-+------------------------+--------------+------+-----+---------+-------+
-| Field                  | Type         | Null | Key | Default | Extra |
-+------------------------+--------------+------+-----+---------+-------+
-| keyword_tags           | varchar(50)  | NO   | PRI | NULL    |       |
-| tags_short_description | varchar(200) | NO   |     | NULL    |       |
-+------------------------+--------------+------+-----+---------+-------+
-2 rows in set (0.01 sec)
-
-mysql> DESCRIBE TECNIQUE;
-+----------------------------+--------------+------+-----+---------+-------+
-| Field                      | Type         | Null | Key | Default | Extra |
-+----------------------------+--------------+------+-----+---------+-------+
-| tecnique                   | varchar(50)  | NO   | PRI | NULL    |       |
-| tecnique_short_description | varchar(300) | NO   |     | NULL    |       |
-+----------------------------+--------------+------+-----+---------+-------+
-2 rows in set (0.01 sec)
-
-mysql> DESCRIBE VARIANT;
-+------------------------------+------------------+------+-----+---------+-------+
-| Field                        | Type             | Null | Key | Default | Extra |
-+------------------------------+------------------+------+-----+---------+-------+
-| variant_name                 | varchar(30)      | NO   | PRI | NULL    |       |
-| variant_type                 | varchar(30)      | NO   |     | NULL    |       |
-| chromosome                   | tinyint unsigned | NO   |     | NULL    |       |
-| chromosome_position          | int unsigned     | NO   |     | NULL    |       |
-| allele_reference             | varchar(50)      | NO   |     | NULL    |       |
-| alternative_allele_reference | varchar(50)      | NO   |     | NULL    |       |
-+------------------------------+------------------+------+-----+---------+-------+
-6 rows in set (0.00 sec)
-
-##SI TRATTA DI UN DATABASE RELAZIONALE## 
-*CON 6 TABELLE DI ENTITÀ{
-											PUBLICATION,
-											GENE,
-											VARIANT,
-											TECNIQUE,
-											TAG,
-											KEGG
-} 
-
-*E 2 TABELLE RELAZIONALI{
-											PUB_GEN_VAR_TEC_TAG,
-											GEN_KEGG
-}
+*E 2 TABELLE RELAZIONALI{ <br>
+											PUB_GEN_VAR_TEC_TAG, <br>
+											GEN_KEGG <br>
+} <br>
 
 ___________________________________________________________________________
 DATABASE CHECK DESCRIPTION
