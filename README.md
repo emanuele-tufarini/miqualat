@@ -36,6 +36,7 @@ Creates ENS_PATH_ID.csv (Ensembl gene id to Kegg pathways id) in the OUTPUT fold
 5) MIQUALAT_data_import_and_check.ipynb  <br>
 Allows the import of files processed with previous notebooks, once checked. <br>
 An error control system prevents the import of incorrect information, but import data into the database only when you are sure (racomanded). <br><br>
+  
 ### LINK TO COMPLETE DOCUMENTATION
 ***
 Click on the link to view the complete documentation. <br>
