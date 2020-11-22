@@ -2,7 +2,8 @@
 ## Table of Contents <br>
 1. [WHAT IS MIQUALAT NOTEBOOK](#WHAT-IS-MIQUALAT-NOTEBOOK)
 2. [MIQUALAT NOTEBOOK DESCRIPTION AND USAGE](#MIQUALAT-NOTEBOOK-DESCRIPTION-AND-USAGE)
-FUNZIONI DI MIQUALAT NOTEBOOK
+3. [LINK TO COMPLETE DOCUMENTATION](#LINK-TO-COMPLETE-DOCUMENTATION)
+
 ### WHAT IS MIQUALAT DATABASE
 ***
 With Miqualat Notebooks you have access to an easy-to-use Jupyter Notebook interface. <br> 
@@ -40,6 +41,8 @@ An error control system prevents the import of incorrect information, but import
 <br>
 <br>
 <br>
+
+### LINK TO COMPLETE DOCUMENTATION
 Click on the link to view the complete documentation. <br>
 
 https://github.com/emanuele-tufarini/miqualat/blob/main/DOCUMENTATION.md <br>
