@@ -3,15 +3,13 @@
 1. [WHAT IS MIQUALAT NOTEBOOK](#WHAT-IS-MIQUALAT-NOTEBOOK)
 2. [MIQUALAT NOTEBOOK DESCRIPTION AND USAGE](#MIQUALAT-NOTEBOOK-DESCRIPTION-AND-USAGE)
 FUNZIONI DI MIQUALAT NOTEBOOK
-### WHAT IS MIQUALAT NOTEBOOK
+### WHAT IS MIQUALAT DATABASE
 ***
-With Miqualat Notebook you have access to an easy-to-use Jupyter Notebook interface. <br> 
+With Miqualat Notebooks you have access to an easy-to-use Jupyter Notebook interface. <br> 
 Miqualat Notebook allows you to save data from publications, genes, variants, tecnique and other and associate them with descriptions and tags. <br> 
 A control system has been implemented to maintain flexibility and freedom to import data while maintaining control over them. <br>
 You can get this data from different databases as pubmed, ensembl, kegg and make automatically links. <br>
 This relational database allows you to link and export information from different tables. <br>
-You can set your database anywhere, on a local or remote machine. <br>
-It does not require large computing resources. <br>
 ### MIQUALAT NOTEBOOK DESCRIPTION AND USAGE
 ***
 To use notebooks select the code cell and click on run, below will describe the notebooks and their functions. <br>
