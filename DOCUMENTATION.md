@@ -1,7 +1,6 @@
-DOCUMENTATION
-
 ### Table of Contents <br>
 1. [WHAT IS MIQUALAT DATABASE](#WHAT-IS-MIQUALAT-DATABASE)
+SET THE WORKING ENVIRONMENT
 2) INSTALL JUPYTER NOTEBOOK
 3) INSTALL MYSQL SERVER
 4) INSTALL MYSQLCLIENT
@@ -24,32 +23,21 @@ A control system has been implemented to maintain flexibility and freedom to imp
 You can get this data from different databases as pubmed, ensembl, kegg and make automatically links. <br>
 This relational database allows you to link and export information from different tables. <br>
 
-___________________________________________________________________________
-INSTALL JUPYTER NOTEBOOK
 
-Update and upgrade your system (recommended).
+### INSTALL JUPYTER NOTEBOOK
 
-$ sudo apt update && sudo apt upgrade
-
-Install python3-pip.
-
-$ sudo apt install python3-pip
-
-Install jupyter notebook.
-
-$ sudo apt install jupyter-notebook
-
-If you need to configure the configuration file is located in /root/.jupyter/jupyter_notebook_config.py
-
-$ jupyter-notebook --generate-config
-
-To access Jupyter Notebook you may need to set up a password.
-
-$ jupyter-notebook password
-
-Run jupyter notebook (on port 8888 by default).
-
-$ jupyter-notebook
+Update and upgrade your system (recommended). <br> 
+$ sudo apt update && sudo apt upgrade <br> <br> 
+Install python3-pip. <br> 
+$ sudo apt install python3-pip <br>  <br> 
+Install jupyter notebook. <br> 
+$ sudo apt install jupyter-notebook <br> <br> 
+If you need to configure the configuration file is located in /root/.jupyter/jupyter_notebook_config.py <br> 
+$ jupyter-notebook --generate-config <br> <br> 
+To access Jupyter Notebook you may need to set up a password. <br>
+$ jupyter-notebook password <br><br> 
+Run jupyter notebook (on port 8888 by default). <br> 
+$ jupyter-notebook <br><br> 
 
 ___________________________________________________________________________
 INSTALL MYSQL SERVER
