@@ -65,24 +65,18 @@ Show your ip. <br>
 $ hostname -I <br> <br> 
 http://localhost/phpmyadmin (work only on local computer not for remote server) <br> 
 
-___________________________________________________________________________
-INSTALL MYSQLCLIENT
-
-Install mysqlclient (connect database remotely using python).
-
-Get more information at: https://pypi.org/project/mysqlclient/
-
-$ sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
-
-$ pip3 install mysqlclient
-
-Update and upgrade your system (recommended).
-
-$ sudo apt update && sudo apt upgrade
+### INSTALL MYSQLCLIENT
+***
+Install mysqlclient (connect database remotely using python). <br> 
+Get more information at: https://pypi.org/project/mysqlclient/ <br> 
+$ sudo apt-get install python3-dev default-libmysqlclient-dev build-essential <br> 
+$ pip3 install mysqlclient <br> <br> 
+Update and upgrade your system (recommended). <br> 
+$ sudo apt update && sudo apt upgrade <br> <br> 
 
 ___________________________________________________________________________
-INSTALL REQUIRED LIBRARIES
-
+### INSTALL REQUIRED LIBRARIES
+***
 The following libraries are required for use miqualat notebooks
 
 $ sudo pip3 install biopython 
@@ -92,8 +86,8 @@ $ sudo pip3 install ensembl-rest
 $ sudo pip3 install mygene
 
 ___________________________________________________________________________
-DESCRIPTION OF THE FUNCTIONS FOLDER
-
+### DESCRIPTION OF THE FUNCTIONS FOLDER
+***
 The functions in FUNCTIONS folder, contain python code that is recalled in the notebooks.
 
 1) ensembl_search.py 
@@ -153,8 +147,8 @@ Click on the link to view the complete documentation. <br>
 https://github.com/emanuele-tufarini/miqualat/blob/main/DOCUMENTATION.md <br>
 
 ___________________________________________________________________________
-CREATE BIOMART FILE
-
+### CREATE BIOMART FILE
+***
 Go to https://www.ensembl.org/biomart/martview/afe982e758c87b06e672bc93a42a4f30.
 
 Export  all results to File CSV.
@@ -168,8 +162,8 @@ Go to Attributes, Gene and create the biomart file following this header (select
 Gene stable ID,Gene name,Gene description,Chromosome/scaffold name,Gene start (bp),Gene end (bp),Strand
 
 ___________________________________________________________________________
-CREATE TABLE FILE
-
+### CREATE TABLE FILE
+***
 To pass the check the csv must have the following headers
 
 !!
@@ -201,8 +195,8 @@ ensembl_gene_ID,kegg_ID
 variant_name,variant_type,chromosome,chromosome_position,allele_reference,alternative_allele_reference
 
 ___________________________________________________________________________
-MIQUALAT DATABASE DESCRIPTION
-
+### MIQUALAT DATABASE DESCRIPTION
+***
 ##accesso a mysql server in localhost##
 mysql -u danilo -p
 Enter password: 
