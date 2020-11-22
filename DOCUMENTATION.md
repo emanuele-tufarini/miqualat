@@ -2,6 +2,8 @@
 1. [WHAT IS MIQUALAT DATABASE](#WHAT-IS-MIQUALAT-DATABASE)
 2. [INSTALL JUPYTER NOTEBOOK](#INSTALL-JUPYTER-NOTEBOOK)
 3. [INSTALL MYSQL SERVER](#INSTALL-MYSQL-SERVER)
+3. [INSTALL REQUIRED PYTHON LIBRARIES](#INSTALL-REQUIRED-PYTHON-LIBRARIES)
+
 
 3) INSTALL MYSQL SERVER
 4) INSTALL MYSQLCLIENT
@@ -74,16 +76,12 @@ $ pip3 install mysqlclient <br> <br>
 Update and upgrade your system (recommended). <br> 
 $ sudo apt update && sudo apt upgrade <br> <br> 
 
-___________________________________________________________________________
-### INSTALL REQUIRED LIBRARIES
+### INSTALL REQUIRED PYTHON LIBRARIES
 ***
-The following libraries are required for use miqualat notebooks
-
-$ sudo pip3 install biopython 
-
-$ sudo pip3 install ensembl-rest
-
-$ sudo pip3 install mygene
+The following libraries are required for use miqualat notebooks <br>
+$ sudo pip3 install biopython <br>
+$ sudo pip3 install ensembl-rest <br>
+$ sudo pip3 install mygene <br><br>
 
 ___________________________________________________________________________
 ### DESCRIPTION OF THE FUNCTIONS FOLDER
