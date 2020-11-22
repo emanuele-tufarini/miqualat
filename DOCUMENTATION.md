@@ -1,7 +1,8 @@
 ### Table of Contents <br>
 1. [WHAT IS MIQUALAT DATABASE](#WHAT-IS-MIQUALAT-DATABASE)
-SET THE WORKING ENVIRONMENT
-2) INSTALL JUPYTER NOTEBOOK
+2. [INSTALL JUPYTER NOTEBOOK](#INSTALL-JUPYTER-NOTEBOOK)
+3. [INSTALL MYSQL SERVER](#INSTALL-MYSQL-SERVER)
+
 3) INSTALL MYSQL SERVER
 4) INSTALL MYSQLCLIENT
 5) INSTALL REQUIRED LIBRARIES
@@ -38,7 +39,6 @@ $ jupyter-notebook password <br><br>
 Run jupyter notebook (on port 8888 by default). <br> 
 $ jupyter-notebook <br><br> 
 
-___________________________________________________________________________
 ### INSTALL MYSQL SERVER
 ***
 Install apache2 and mysql-server. <br> 
