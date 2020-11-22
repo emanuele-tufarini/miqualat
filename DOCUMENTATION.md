@@ -47,7 +47,7 @@ $ sudo apt install mysql-server <br> <br>
 If you have a raspberry or similar system use this command to install mysql-server. <br> 
 $ sudo apt install mariadb-server-10.0 <br> <br> 
 Create user and set password for database (this user can be used to access in phpmyadmin, keep your credentials). <br> 
-$ sudo mysql -u root <br> <br> 
+$ sudo mysql -u root <br>
 $ CREATE USER 'user'@'localhost' IDENTIFIED BY 'password'; <br> <br> 
 Grant privileges on all databases. <br> 
 $ GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost'; <br> <br> 
