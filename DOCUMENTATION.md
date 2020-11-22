@@ -2,7 +2,9 @@
 1. [WHAT IS MIQUALAT DATABASE](#WHAT-IS-MIQUALAT-DATABASE)
 2. [INSTALL JUPYTER NOTEBOOK](#INSTALL-JUPYTER-NOTEBOOK)
 3. [INSTALL MYSQL SERVER](#INSTALL-MYSQL-SERVER)
-3. [INSTALL REQUIRED PYTHON LIBRARIES](#INSTALL-REQUIRED-PYTHON-LIBRARIES)
+4. [INSTALL REQUIRED PYTHON LIBRARIES](#INSTALL-REQUIRED-PYTHON-LIBRARIES)
+5. [DESCRIPTION OF THE FUNCTIONS FOLDER](#DESCRIPTION-OF-THE-FUNCTIONS-FOLDER)
+
 
 
 3) INSTALL MYSQL SERVER
@@ -63,7 +65,7 @@ $ sudo apt install phpmyadmin <br>
 $ sudo systemctl restart apache2 <br> <br> 
 Connect phpmyadmin using your browser (on port 80: /phpmyadmin). <br> 
 http://server_ip(ex 192.168.0...)/phpmyadmin <br> <br> 
-Show your ip. <br> 
+Show your IP. <br> 
 $ hostname -I <br> <br> 
 http://localhost/phpmyadmin (work only on local computer not for remote server) <br> 
 
@@ -78,35 +80,24 @@ $ sudo apt update && sudo apt upgrade <br> <br>
 
 ### INSTALL REQUIRED PYTHON LIBRARIES
 ***
-The following libraries are required for use miqualat notebooks <br>
+The following libraries are required for use miqualat notebooks. <br>
 $ sudo pip3 install biopython <br>
 $ sudo pip3 install ensembl-rest <br>
 $ sudo pip3 install mygene <br><br>
 
-___________________________________________________________________________
 ### DESCRIPTION OF THE FUNCTIONS FOLDER
 ***
-The functions in FUNCTIONS folder, contain python code that is recalled in the notebooks.
-
-1) ensembl_search.py 
-
-Use the ensembl-rest library to get information about genes from the Ensembl database.
-
-2) ensembl_to_kegg_id.py 
-
-Convert Ensembl gene id to the Kegg id of the gene and related pathways, using mygene and Bio.KEGG.REST (in biopython library).
-
-3) MIQUALAT_data_import_and_check.py 
-
-Import and check the csv files processed with previous notebooks, using MySQLdb (in mysqlclient library).
-
-4) pubmed_search.py 
-
-Carry out searches within the pubmed database using biopython.
-
-5) python_parser_biomart_gene_csv.py 
-
-Convert the biomart file (which contains all biomart genes) into the right format for the GENE table.
+The functions in FUNCTIONS folder, contain python code that is recalled in the notebooks. <br><br>
+1) ensembl_search.py <br>
+Use the ensembl-rest library to get information about genes from the Ensembl database. <br><br>
+2) ensembl_to_kegg_id.py <br>
+Convert Ensembl gene id to the Kegg id of the gene and related pathways, using mygene and Bio.KEGG.REST (in biopython library). <br><br>
+3) MIQUALAT_data_import_and_check.py <br>
+Import and check the csv files processed with previous notebooks, using MySQLdb (in mysqlclient library). <br><br>
+4) pubmed_search.py <br>
+Carry out searches within the pubmed database using biopython. <br><br>
+5) python_parser_biomart_gene_csv.py <br>
+Convert the biomart file (which contains all biomart genes) into the right format for the GENE table. <br><br>
 
 ___________________________________________________________________________
 DESCRIPTION OF THE OUTPUT FOLDER
