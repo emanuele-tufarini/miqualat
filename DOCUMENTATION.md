@@ -54,9 +54,9 @@ $ GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost'; <br> <br>
 Grant privileges on one databases (safer). <br>  
 $ GRANT ALL PRIVILEGES ON DATABASE. * TO 'user'@'localhost'; <br>
 $ FLUSH PRIVILEGES; <br> <br> 
-!! IMPORTANT (pay attention before continuing with the command below). <br>
-When you install phpmyadmin (command below) after select apache2 (with TAB) and press SPACE. <br>
-After leave all empty (press ENTER) !! <br> 
+!! IMPORTANT (pay attention before continuing with the command below) !! <br>
+!! When you install phpmyadmin (command below) after select apache2 (with TAB) and press SPACE !! <br>
+!! After leave all empty (press ENTER) !! <br> 
 $ sudo apt install phpmyadmin <br>
 $ sudo systemctl restart apache2 <br> <br> 
 Connect phpmyadmin using your browser (on port 80: /phpmyadmin). <br> 
