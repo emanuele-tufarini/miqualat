@@ -31,9 +31,10 @@ Creates ENS_PATH_ID.csv (Ensembl gene id to Kegg pathways id) in the OUTPUT fold
 Allows the import of files processed with previous notebooks, once checked. <br>
 Input file are in INPUT folder folder.
 An error control system prevents the import of incorrect information, but import data into the database only when you are sure (racomanded). <br><br>
-6) MIQUALAT_data_export.ipynb  <br>                           @inserire il nome del notebook<br>
+6) MIQUALAT_data_export.ipynb  <br>                          
 Allows you to export data from miqualat database. <br>
-File are saved in OUTPUT folder with name exported_data_Y-m-d_h-d-s. <br><br>
+To export the file enter the desired query number.
+File are saved in OUTPUT folder with name table_TABLE_query_number_NUMBER_export_data_results__Y-m-d_h-d-s. <br><br>
   
 ### LINK TO COMPLETE DOCUMENTATION
 ***
