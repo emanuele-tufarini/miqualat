@@ -1,10 +1,3 @@
-### Required Python Libraries
-***
-The following libraries are required for use miqualat notebooks. <br>
-$ sudo pip3 install biopython <br>
-$ sudo pip3 install ensembl-rest <br>
-$ sudo pip3 install mygene <br>
-$ sudo pip3 install pandas <br>
 ### What is Miqualat Database
 ***
 With Miqualat Notebooks you have access to an easy-to-use Jupyter Notebook interface. <br> 
@@ -12,6 +5,7 @@ Miqualat Notebook allows you to save data from publications, genes, variants, te
 A control system has been implemented to maintain flexibility and freedom to import data while maintaining control over them. <br>
 You can get this data from different databases as pubmed, ensembl, kegg and make automatically links. <br>
 This relational database allows you to link and export information from different tables. <br>
+
 ### Miqualat Notebooks Description and Usage
 ***
 To use notebooks select the code cell and click on run, below will describe the notebooks and their functions. <br>
@@ -41,8 +35,16 @@ An error control system prevents the import of incorrect information, but import
 6) MIQUALAT_data_export.ipynb  <br>                          
 Allows you to export data from miqualat database. <br>
 To export the file enter the desired query number.
-File are saved in OUTPUT folder with name table_TABLE_query_number_NUMBER_export_data_results__Y-m-d_h-d-s. <br><br>
-  
+File are saved in OUTPUT folder with name table_TABLE_query_number_NUMBER_export_data_results__Y-m-d_h-d-s. <br>
+
+### Required Python Libraries
+***
+The following libraries are required for use miqualat notebooks. <br>
+$ sudo pip3 install biopython <br>
+$ sudo pip3 install ensembl-rest <br>
+$ sudo pip3 install mygene <br>
+$ sudo pip3 install pandas <br>
+
 ### LINK TO COMPLETE DOCUMENTATION
 ***
 Click on the link to view the complete documentation. <br>
