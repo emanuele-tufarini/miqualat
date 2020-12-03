@@ -4,7 +4,7 @@ USE MIQUALAT;
 
 CREATE TABLE PUBLICATION (
 	pubmed_ID INT (8) UNSIGNED NOT NULL,
-	doi VARCHAR (100),
+	DOI VARCHAR (100),
 	article_title VARCHAR (300) NOT NULL,
 	article_authors VARCHAR (300) NOT NULL,
 	article_journal VARCHAR (100) NOT NULL,
