@@ -1,3 +1,10 @@
+### Required Python Libraries
+***
+The following libraries are required for use miqualat notebooks. <br>
+$ sudo pip3 install biopython <br>
+$ sudo pip3 install ensembl-rest <br>
+$ sudo pip3 install mygene <br>
+$ sudo pip3 install pandas <br>
 ### What is Miqualat Database
 ***
 With Miqualat Notebooks you have access to an easy-to-use Jupyter Notebook interface. <br> 
