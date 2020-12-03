@@ -16,6 +16,7 @@ This relational database allows you to link and export information from differen
 
 ### Miqualat Notebooks Description and Usage
 ***
+Notebooks are designed to simplify the generation, import, export of information from the database. <br>
 To use notebooks select the code cell and click on run, below will describe the notebooks and their functions. <br>
 Five notebooks have been built, that allow you to search, import and check into the miqualat database. <br>
 1) MIQUALAT_PUBLICATION_data_assess.ipynb <br>
