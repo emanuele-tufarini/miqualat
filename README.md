@@ -9,7 +9,7 @@ $ sudo pip3 install pandas <br>
 ### What is Miqualat Database
 ***
 With Miqualat Notebooks you have access to an easy-to-use Jupyter Notebook interface. <br> 
-Miqualat Notebook allows you to save data from publications, genes, variants, tecnique and other and associate them with descriptions and tags. <br> 
+Miqualat Notebook allows you to save data from publications, genes, variants, tecnique and other, associate them with descriptions and tags and import/export in the miqualat database. <br> 
 A control system has been implemented to maintain flexibility and freedom to import data while maintaining control over them. <br>
 You can get this data from different databases as pubmed, ensembl, kegg and make automatically links. <br>
 This relational database allows you to link and export information from different tables. <br>
