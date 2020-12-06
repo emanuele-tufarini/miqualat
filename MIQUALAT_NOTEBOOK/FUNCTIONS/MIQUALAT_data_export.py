@@ -904,4 +904,3 @@ def miqualat_db_data_exporter():
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 
-miqualat_db_data_exporter()
