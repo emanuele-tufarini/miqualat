@@ -85,7 +85,7 @@ def pubmed_search(keyword,keyword_title):
             n += 1
     except:
         pass
-    print("\nenter 'exit' for quit\n")
+    print("\nenter 'exit' for quit or leave empty\n")
     NumArticle = (input("enter the title number for print the article/s: ")).replace(" ", "")
     if NumArticle == "exit":
         print("\nsee you later!")
