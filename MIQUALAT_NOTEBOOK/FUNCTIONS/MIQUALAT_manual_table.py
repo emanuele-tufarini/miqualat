@@ -7,7 +7,7 @@ def relational_table():
     while pubmed_ID == "" or pubmed_ID.lower() == "null":
         print ("pubmed_ID cannot be NULL retry")
         pubmed_ID=input("enter pubmed_ID (ex 29680643), cannot be NULL (empty): ")
-    ensembl_gene_ID=input("enter ensembl_gene_ID (ex ENSBTAG00000031544), can be NULL (empty): ")
+    ensembl_gene_ID=input("enter ensembl_gene_ID (ex ENSBTAG00000031544), can be NULL (empty), insert one at time: ")
     if ensembl_gene_ID == "" or ensembl_gene_ID.lower() == "null":
         ensembl_gene_ID = "NULL"
     variant_name=input("enter variant_name (NULL or variant_name, variant table for more info), can be NULL (empty): ")
@@ -24,14 +24,14 @@ def relational_table():
     integer_progressive_ID=('"'+integer_progressive_ID+'"').replace(" ","")
     pubmed_ID=('"'+pubmed_ID+'"').replace(" ","")
     ensembl_gene_ID=('"'+ensembl_gene_ID+'"').replace(" ","")
-    variant_name=('"'+variant_name+'"').replace(" ","")
-    tecnique=('"'+tecnique+'"').replace(" ","")
+    variant_name=('"'+variant_name+'"')
+    tecnique=('"'+tecnique+'"')
     relationship_note='"'+relationship_note+'"'
     keyword_tags=keyword_tags.split(",")
     for i in keyword_tags:
         if i == "" or i.lower() == "null":
             i = "NULL"
-        i=('"'+i+'"').replace(" ","")
+        i=('"'+i+'"')
         table_file=open("PUB_GEN_VAR_TEC_TAG.csv","a")
         table_file.write(integer_progressive_ID+','+pubmed_ID+','+\
                               ensembl_gene_ID+','+variant_name+','+\
@@ -47,6 +47,46 @@ def relational_table_repeat():
         else:
             relational_table()  
 
+#relational table more genes at a time
+
+def relational_table_list_of_gene():
+	integer_progressive_ID="NULL"
+	pubmed_ID=input("enter pubmed_ID (ex 29680643), cannot be NULL (empty): ")
+	while pubmed_ID == "" or pubmed_ID.lower() == "null":
+		print ("pubmed_ID cannot be NULL retry")
+		pubmed_ID=input("enter pubmed_ID (ex 29680643), cannot be NULL (empty): ")
+	ensembl_gene_ID=input("enter ensembl_gene_ID (ex ENSBTAG00000031544,ENSBTAG00000053003), can be NULL (empty): ")
+	ensembl_gene_ID=ensembl_gene_ID.split(",")
+	ensembl_gene_ID=["NULL" if i=="" else i for i in ensembl_gene_ID]
+	ensembl_gene_ID=["NULL" if i.lower()=="null" else i for i in ensembl_gene_ID]
+	variant_name=input("enter variant_name (NULL or variant_name, variant table for more info), can be NULL (empty): ")
+	if variant_name == "" or variant_name.lower() == "null":
+		variant_name = "NULL"
+	tecnique=input("enter tecnique (ex QPCR), can be NULL (empty): ")
+	if tecnique == "" or tecnique.lower() == "null":
+		tecnique = "NULL"
+	#see for i cicle
+	keyword_tags=input("enter keyword_tags (ex apoptosis, antioxidants), insert one keyword at time, can be NULL (empty): ")
+	relationship_note=input("enter relationship_note (simple description of relationship max 200 char ex gene and tecnique), can be NULL (empty): ")
+	if relationship_note == "" or relationship_note.lower() == "null":
+		relationship_note = "NULL"
+	integer_progressive_ID=('"'+integer_progressive_ID+'"').replace(" ","")
+	pubmed_ID=('"'+pubmed_ID+'"').replace(" ","")
+	variant_name=('"'+variant_name+'"')
+	tecnique=('"'+tecnique+'"')
+	relationship_note='"'+relationship_note+'"'
+	keyword_tags=keyword_tags.split(",")
+	for i in keyword_tags:
+		if i == "" or i.lower() == "null":
+			i = "NULL"
+		i=('"'+i+'"')
+		table_file=open("PUB_GEN_VAR_TEC_TAG.csv","a")
+		for x in ensembl_gene_ID:
+			x=('"'+x+'"').replace(" ","")
+			table_file.write(integer_progressive_ID+','+pubmed_ID+','+\
+								  x+','+variant_name+','+\
+								  tecnique+','+i+','+relationship_note+'\n')            
+
 #tag table
   
 def tag_table():
@@ -58,8 +98,8 @@ def tag_table():
     while tags_short_description == "" or tags_short_description.lower() == "null":
         print ("tags_short_description cannot be NULL retry")
         tags_short_description=input("enter tags_short_description (ex prevent or slow damage to cells caused by free radicals), cannot be NULL (empty): ")
-    keyword_tags=('"'+keyword_tags+'"').replace(" ","")    
-    tags_short_description=('"'+tags_short_description+'"').replace(" ","")    
+    keyword_tags=('"'+keyword_tags+'"') 
+    tags_short_description=('"'+tags_short_description+'"')   
     table_file=open("TAG.csv","a")
     table_file.write(keyword_tags+','+tags_short_description+"\n")
 
