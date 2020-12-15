@@ -66,7 +66,7 @@ def miqualat_db_data_exporter():
     "PUBLICATION":["pubmed_ID","doi","article_title","article_authors","article_journal","publication_year"],
     "TECNIQUE":["tecnique","tecnique_short_description"],
     "TAG":["keyword_tags","tags_short_description"],
-    "VARIANT":["variant_name","variant_type","chromosome","chromosome_position","allele_reference","alternative_allele_reference"],
+    "VARIANT":["variant_name","variant_type","chromosome","position","reference_allele","alternative_allele","rs_ID","species","refseq"],
     "PUB_GEN_VAR_TEC_TAG":["integer_progressive_ID","pubmed_ID","ensembl_gene_ID","variant_name","tecnique","keyword_tags","relationship_note"],
     }
     
@@ -129,7 +129,8 @@ def miqualat_db_data_exporter():
                     for ID in ensembl_gene_ID_list:
                         cursor.execute(gene_queries[code] % ID)
                         query_results=[list(query_result) for query_result in cursor]
-                        IDs_query_results.append(query_results[0])
+                        for result in query_results:
+                            IDs_query_results.append(result)
                     result_df=pd.DataFrame.from_records(data=IDs_query_results,columns=result_header)
                     display(result_df)
                     save_file_selection=input(save_file_string)
@@ -708,10 +709,11 @@ def miqualat_db_data_exporter():
             print(
                     "\nqueires selection menu to export data from table VARIANT:\n",
                     "\n1: to extract all table records;",
-                    "\n2: to extract all record fields of all variants relative to an input ensembl_gene_ID;"
-                    "\n3: to extract all record fields of all variant relative to an input gene_name of an input species;"
-                    "\n4: to extract all record fields of all variants and the repsective ensembl_gene_ID and gene_name relative to an input species;",
-                    "\n5: to extract all record fields of all variants and the repsective ensembl_gene_ID and gene_name relative to an input species and an input chromosome;"
+                    "\n2: to extract all record fields relative to an input variant_name;"
+                    "\n3: to extract all record fields of all variants relative to an input ensembl_gene_ID;"
+                    "\n4: to extract all record fields of all variant relative to an input gene_name of an input species;"
+                    "\n5: to extract all record fields of all variants and the respective ensembl_gene_ID and gene_name relative to an input species;",
+                    "\n6: to extract all record fields of all variants and the respective ensembl_gene_ID and gene_name relative to an input species and an input chromosome;"
                     ) 
 
             #variabili richieste come parametri di input all'utente: queries selezionate per l'export dalla tabella VARIANT del database MIQUALAT#
@@ -720,10 +722,11 @@ def miqualat_db_data_exporter():
             #dizionario delle queries specifiche per la tabella VARIANT#
             variant_queries={
                                      "1":"SELECT * FROM VARIANT;",
-                                     "2":"SELECT DISTINCT PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,VARIANT.* FROM PUB_GEN_VAR_TEC_TAG,VARIANT WHERE PUB_GEN_VAR_TEC_TAG.variant_name=VARIANT.variant_name AND PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=\'%s\';",
-                                     "3":"SELECT DISTINCT GENE.gene_name,GENE.species,VARIANT.* FROM GENE,PUB_GEN_VAR_TEC_TAG,VARIANT WHERE GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.variant_name=VARIANT.variant_name AND GENE.gene_name=\'%s\' AND GENE.species=\'%s\';",
-                                     "4":"SELECT DISTINCT VARIANT.*,PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,GENE.gene_name,GENE.species FROM GENE,PUB_GEN_VAR_TEC_TAG,VARIANT WHERE GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.variant_name=VARIANT.variant_name AND GENE.species=\'%s\';",
-                                     "5":"SELECT DISTINCT VARIANT.*,PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,GENE.gene_name,GENE.species FROM GENE,PUB_GEN_VAR_TEC_TAG,VARIANT WHERE GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.variant_name=VARIANT.variant_name AND GENE.species=\'%s\' AND GENE.chromosome=%s;"
+                                     "2":"SELECT * FROM VARIANT WHERE VARIANT.variant_name=\'%s\';",
+                                     "3":"SELECT DISTINCT PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,VARIANT.* FROM PUB_GEN_VAR_TEC_TAG,VARIANT WHERE PUB_GEN_VAR_TEC_TAG.variant_name=VARIANT.variant_name AND PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=\'%s\';",
+                                     "4":"SELECT DISTINCT GENE.gene_name,VARIANT.* FROM GENE,PUB_GEN_VAR_TEC_TAG,VARIANT WHERE GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.variant_name=VARIANT.variant_name AND GENE.gene_name=\'%s\' AND VARIANT.species=\'%s\' AND GENE.species=VARIANT.species;",
+                                     "5":"SELECT DISTINCT VARIANT.*,PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,GENE.gene_name FROM GENE,PUB_GEN_VAR_TEC_TAG,VARIANT WHERE GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.variant_name=VARIANT.variant_name AND VARIANT.species=\'%s\' AND GENE.species=VARIANT.species;",
+                                     "6":"SELECT DISTINCT VARIANT.*,PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,GENE.gene_name FROM GENE,PUB_GEN_VAR_TEC_TAG,VARIANT WHERE GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.variant_name=VARIANT.variant_name AND VARIANT.species=\'%s\' AND VARIANT.chromosome=%s AND GENE.species=VARIANT.species;"
                                      }
 
             #esecuzione sul database delle queries selezionate in input dall'utente per l'export dei dati dalla tabella VARIANT#
@@ -742,7 +745,21 @@ def miqualat_db_data_exporter():
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "2"):
-                    result_header=["ensembl_gene_ID","variant_name","variant_type","chromosome","chromosome_position","allele_reference","alternative_allele_reference"]
+                    result_header=["variant_name","variant_type","chromosome","position","reference_allele","alternative_allele","rs_ID","species","refseq"]
+                    variant_name_list=input("\nenter variant_name (i.e. bosTau11_29:123456789_A|G or bosTau11_29:123456789_A|G,hg38_1:146793_A|G,...): ").split(",")
+                    variant_name_query_results=[]
+                    for variant_name in variant_name_list:
+                        cursor.execute(variant_queries[code] % variant_name)
+                        query_results=[list(query_result) for query_result in cursor]
+                        for result in query_results:
+                            variant_name_query_results.append(result)
+                    result_df=pd.DataFrame.from_records(data=variant_name_query_results,columns=result_header)
+                    display(result_df)
+                    save_file_selection=input(save_file_string)
+                    if(save_file_selection == "yes"):
+                        result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
+                elif(code == "3"):
+                    result_header=["ensembl_gene_ID","variant_name","variant_type","chromosome","position","reference_allele","alternative_allele","rs_ID","species","refseq"]
                     ensembl_gene_ID_list=input("\nenter ensembl_gene_ID (i.e. ENSBTAG00000000009 or ENSBTAG00000000010,ENSBTAG00000000011,ENSBTAG00000000012,...): ").split(",")
                     IDs_query_results=[]
                     for ID in ensembl_gene_ID_list:
@@ -755,8 +772,8 @@ def miqualat_db_data_exporter():
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
-                elif(code == "3"):
-                    result_header=["gene_name","species","variant_name","variant_type","chromosome","chromosome_position","allele_reference","alternative_allele_reference"]
+                elif(code == "4"):
+                    result_header=["gene_name","variant_name","variant_type","chromosome","position","reference_allele","alternative_allele","rs_ID","species","refseq"]
                     cursor.execute(variant_queries[code] % (input("\nenter gene_name (i.e. UBL7 or UBL7,TDH,TTC33,...): "),input("\nenter species (i.e. Bos taurus or Homo sapiens): ")))
                     query_results=[list(query_result) for query_result in cursor]
                     result_df=pd.DataFrame.from_records(data=query_results,columns=result_header)
@@ -764,8 +781,8 @@ def miqualat_db_data_exporter():
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
-                elif(code == "4"):
-                    result_header=["variant_name","variant_type","chromosome","chromosome_position","allele_reference","alternative_allele_reference","ensembl_gene_ID","gene_name","species"]
+                elif(code == "5"):
+                    result_header=["variant_name","variant_type","chromosome","position","reference_allele","alternative_allele","rs_ID","species","refseq","ensembl_gene_ID","gene_name"]
                     cursor.execute(variant_queries[code] % input("\nenter species (i.e. Bos taurus or Homo sapiens): "))
                     query_results=[list(query_result) for query_result in cursor]
                     result_df=pd.DataFrame.from_records(data=query_results,columns=result_header)
@@ -773,8 +790,8 @@ def miqualat_db_data_exporter():
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
-                elif(code == "5"):
-                    result_header=["variant_name","variant_type","chromosome","chromosome_position","allele_reference","alternative_allele_reference","ensembl_gene_ID","gene_name","species"]
+                elif(code == "6"):
+                    result_header=["variant_name","variant_type","chromosome","position","reference_allele","alternative_allele","rs_ID","species","refseq","ensembl_gene_ID","gene_name"]
                     cursor.execute(variant_queries[code] % (input("\nenter species (i.e. Bos taurus or Homo sapiens): "),input("\nenter chromosome (i.e. 8): ")))
                     query_results=[list(query_result) for query_result in cursor]
                     result_df=pd.DataFrame.from_records(data=query_results,columns=result_header)
@@ -903,4 +920,3 @@ def miqualat_db_data_exporter():
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
-                

@@ -38,7 +38,7 @@ def database_security_checker(host,user,pswd,db,csv_file_path,table_name):
     "PUBLICATION":["pubmed_ID,doi,article_title,article_authors,article_journal,publication_year","(%s, %s, %s, %s, %s, %s)",["int","string","string","string","string","int"]],
     "TAG":["keyword_tags,tags_short_description","(%s, %s)",["string","string"]],
     "TECNIQUE":["tecnique,tecnique_short_description","(%s, %s)",["string","string"]],
-    "VARIANT":["variant_name,variant_type,chromosome,chromosome_position,allele_reference,alternative_allele_reference","(%s, %s, %s, %s,%s,%s)",["string","string","int","int","string","string"]]
+    "VARIANT":["variant_name,variant_type,chromosome,position,reference_allele,alternative_allele,rs_ID,species,refseq","(%s, %s, %s, %s,%s,%s,%s,%s,%s)",["string","string","int","int","string","string","string","string","string"]]
     }
     entries_list=[]
     PUB_GEN_VAR_TEC_TAG_entries_list=[]
