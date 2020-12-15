@@ -191,7 +191,7 @@ def variant_table():
     
     table_file=open("VARIANT.csv","a")
     table_file.write(variant_name+','+variant_type+','+chromosome+','+position+\
-                          ','+reference_allele+','+alternative_allele+rs_ID+species+refseq+"\n")
+                          ','+reference_allele+','+alternative_allele+','+rs_ID+','+species+','+refseq+"\n")
 
 def variant_table_repeat():
     repeat=True
