@@ -4,7 +4,7 @@ USE MIQUALAT;
 
 CREATE TABLE PUBLICATION (
 	pubmed_ID INT (8) UNSIGNED NOT NULL,
-	DOI VARCHAR (100),
+	doi VARCHAR (100),
 	article_title VARCHAR (300) NOT NULL,
 	article_authors VARCHAR (300) NOT NULL,
 	article_journal VARCHAR (100) NOT NULL,
@@ -26,12 +26,15 @@ CREATE TABLE GENE (
 );
 
 CREATE TABLE VARIANT (
-	variant_name VARCHAR (30) NOT NULL,
-	variant_type VARCHAR (30) NOT NULL,
+	variant_name VARCHAR (50) NOT NULL,
+	variant_type VARCHAR (50) NOT NULL,
 	chromosome  TINYINT (2) UNSIGNED NOT NULL,
-	chromosome_position INT UNSIGNED NOT NULL,
-	allele_reference VARCHAR (50) NOT NULL,
-	alternative_allele_reference VARCHAR (50) NOT NULL,
+	position INT UNSIGNED NOT NULL,
+	reference_allele VARCHAR (20) NOT NULL,
+	alternative_allele VARCHAR (20) NOT NULL,
+	rs_ID VARCHAR(20),
+	species VARCHAR (50) NOT NULL,
+	refseq VARCHAR (50) NOT NULL,
 	PRIMARY KEY (variant_name)
 );
 
