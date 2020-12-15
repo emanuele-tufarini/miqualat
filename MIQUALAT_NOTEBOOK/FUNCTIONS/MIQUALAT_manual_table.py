@@ -154,27 +154,44 @@ def variant_table():
     while chromosome == "" or chromosome.lower() == "null":
         print ("chromosome cannot be NULL retry")
         chromosome=input("enter chromosome, cannot be NULL (empty): ")
-    chromosome_position=input("enter chromosome_position, cannot be NULL (empty): ")
-    while chromosome_position == "" or chromosome_position.lower() == "null":
-        print ("chromosome_position cannot be NULL retry")
-        chromosome_position=input("enter chromosome_position, cannot be NULL (empty): ")
-    allele_reference=input("enter allele_reference, cannot be NULL (empty): ")
-    while allele_reference == "" or allele_reference.lower() == "null":
-        print ("allele_reference cannot be NULL retry")
-        allele_reference=input("enter allele_reference, cannot be NULL (empty): ")
-    alternative_allele_reference=input("enter alternative_allele_reference, cannot be NULL (empty): ")
-    while alternative_allele_reference == "" or alternative_allele_reference.lower() == "null":
-        print ("alternative_allele_reference cannot be NULL retry")
-        alternative_allele_reference=input("enter alternative_allele_reference, cannot be NULL (empty): ")
-    variant_name=('"'+variant_name+'"').replace(" ","")
-    variant_type=('"'+variant_type+'"').replace(" ","")    
-    chromosome=('"'+chromosome+'"').replace(" ","")    
-    chromosome_position=('"'+chromosome_position+'"').replace(" ","")    
-    allele_reference=('"'+allele_reference+'"').replace(" ","")    
-    alternative_allele_reference=('"'+alternative_allele_reference+'"').replace(" ","")    
+    position=input("enter position, cannot be NULL (empty): ")
+    while position == "" or position.lower() == "null":
+        print ("position cannot be NULL retry")
+        position=input("enter position, cannot be NULL (empty): ")            
+    reference_allele=input("enter reference_allele, cannot be NULL (empty): ")
+    while reference_allele == "" or reference_allele.lower() == "null":
+        print ("reference_allele cannot be NULL retry")
+        reference_allele=input("enter reference_allele, cannot be NULL (empty): ")
+    alternative_allele=input("enter alternative_allele, cannot be NULL (empty): ")
+    while alternative_allele == "" or alternative_allele.lower() == "null":
+        print ("alternative_allele cannot be NULL retry")
+        alternative_allele=input("enter alternative_allele, cannot be NULL (empty): ")
+    rs_ID=input("enter rs_ID, can be NULL (empty): ")
+    if rs_ID == "" or rs_ID.lower() == "null":
+        rs_ID="NULL"
+    species=input("enter species, cannot be NULL (empty): ")
+    while species == "" or species.lower() == "null":
+        print ("species cannot be NULL retry")
+        species=input("enter species, cannot be NULL (empty): ")
+    refseq=input("enter refseq, cannot be NULL (empty): ")
+    while refseq == "" or refseq.lower() == "null":
+        print ("refseq cannot be NULL retry")
+        refseq=input("enter refseq, cannot be NULL (empty): ")
+   
+   
+    variant_name='"'+variant_name+'"'
+    variant_type='"'+variant_type+'"'
+    chromosome='"'+chromosome+'"'
+    position='"'+position+'"'
+    reference_allele='"'+reference_allele+'"' 
+    alternative_allele='"'+alternative_allele+'"'
+    rs_ID='"'+rs_ID+'"'  
+    species='"'+species+'"'      
+    refseq='"'+refseq+'"'
+    
     table_file=open("VARIANT.csv","a")
-    table_file.write(variant_name+','+variant_type+','+chromosome+','+chromosome_position+\
-                          ','+allele_reference+','+alternative_allele_reference+"\n")
+    table_file.write(variant_name+','+variant_type+','+chromosome+','+position+\
+                          ','+reference_allele+','+alternative_allele+rs_ID+species+refseq+"\n")
 
 def variant_table_repeat():
     repeat=True
