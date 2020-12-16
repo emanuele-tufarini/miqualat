@@ -45,6 +45,7 @@ An error control system prevents the import of incorrect information, but import
 Allows you to export data from miqualat database. <br>
 To export the file enter the desired query number.
 File are saved in OUTPUT folder with name table_TABLE_query_number_NUMBER_export_data_results__Y-m-d_h-d-s. <br> <br>
+  
 We prosed as variant_name this combination of values <br>
 1) international code for species/reference sequence (i.e. hg38 for last human reference sequence) <br> 
 2) chromosome  <br>
