@@ -51,11 +51,11 @@ Allows you to export data from miqualat database. <br>
 To export the file enter the desired query number.
 File are saved in OUTPUT folder with name table_TABLE_query_number_NUMBER_export_data_results__Y-m-d_h-d-s. <br><br>
 We prosed as variant_name this combination of values <br>
-1) international code for species/reference sequence (i.e. hg38 for last human reference sequence) <br> 
-2) chromosome  <br>
-3) position  <br>
-4) reference allele  <br>
-5) alternative allele (i.e. if the alternative allele is too long, try to find a way to summarize it) <br><br>
+1. international code for species/reference sequence (i.e. hg38 for last human reference sequence) <br> 
+2. chromosome  <br>
+3. position  <br>
+4. reference allele  <br>
+5. alternative allele (i.e. if the alternative allele is too long, try to find a way to summarize it) <br><br>
 example: hg38_1:146793_A|G <br> <br>
 
 ### LINK TO COMPLETE DOCUMENTATION
