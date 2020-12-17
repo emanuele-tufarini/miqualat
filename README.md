@@ -37,15 +37,19 @@ Option 1) correlates the ensembl gene id to the kegg id of the gene and related 
 Option 2) processes the entire GENE.csv file. <br>
 Creates ENS_GENE_ID.csv (Ensembl gene id to Kegg gene id) in the OUTPUT folder. <br>
 Creates ENS_PATH_ID.csv (Ensembl gene id to Kegg pathways id) in the OUTPUT folder. <br><br>
-5) MIQUALAT_data_import_and_check.ipynb  <br>
+5) MIQUALAT_manual_table.ipynb <br>
+This notebook use the MIQUALAT_manual_table.py function in FUNCTIONS folder. <br>
+Allows you to create non-automated tables (PUB_GEN_TEC_VAR_TAG, TAG, TECNQUE, VARIANT). It’s based on loops who add one line at time at csv (when you enter yes the function repeat the loop or save file to the INPUT folder if you leave empty), there are an option to simplify this process and insert much genes at time to PUB_GEN_TEC_VAR_TAG table. <br>
+This function have a control on NULL value (convert all empty value in NULL if possible, in any case NULL is converted to uppercase). There are automatically warning if you cannot enter NULL value. <br>
+Follow the instructions to create the desired table. <br><br>
+6) MIQUALAT_data_import_and_check.ipynb  <br>
 Allows the import of files processed with previous notebooks, once checked. <br>
 Input file are in INPUT folder folder.
 An error control system prevents the import of incorrect information, but import data into the database only when you are sure (racomanded). <br><br>
-6) MIQUALAT_data_export.ipynb  <br>                          
+7) MIQUALAT_data_export.ipynb  <br>                          
 Allows you to export data from miqualat database. <br>
 To export the file enter the desired query number.
 File are saved in OUTPUT folder with name table_TABLE_query_number_NUMBER_export_data_results__Y-m-d_h-d-s. <br><br>
-  
 We prosed as variant_name this combination of values <br>
 1) international code for species/reference sequence (i.e. hg38 for last human reference sequence) <br> 
 2) chromosome  <br>
