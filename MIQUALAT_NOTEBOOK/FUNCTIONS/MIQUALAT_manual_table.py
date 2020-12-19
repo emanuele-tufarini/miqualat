@@ -14,9 +14,6 @@ def relational_table():
     if variant_name == "" or variant_name.lower() == "null":
         variant_name = "NULL"
     tecnique=input("enter tecnique (ex QPCR), can be NULL (empty): ")
-    if tecnique == "" or tecnique.lower() == "null":
-        tecnique = "NULL"
-    #see for i cicle
     keyword_tags=input("enter keyword_tags (ex apoptosis, antioxidants), insert one keyword at time, can be NULL (empty): ")
     relationship_note=input("enter relationship_note (simple description of relationship max 200 char ex gene and tecnique), can be NULL (empty): ")
     if relationship_note == "" or relationship_note.lower() == "null":
@@ -24,18 +21,22 @@ def relational_table():
     integer_progressive_ID=('"'+integer_progressive_ID+'"').replace(" ","")
     pubmed_ID=('"'+pubmed_ID+'"').replace(" ","")
     ensembl_gene_ID=('"'+ensembl_gene_ID+'"').replace(" ","")
-    variant_name=('"'+variant_name+'"')
-    tecnique=('"'+tecnique+'"')
+    variant_name=('"'+variant_name+'"') 
     relationship_note='"'+relationship_note+'"'
+    tecnique=tecnique.split(",")
     keyword_tags=keyword_tags.split(",")
-    for i in keyword_tags:
-        if i == "" or i.lower() == "null":
-            i = "NULL"
-        i=('"'+i+'"')
-        table_file=open("PUB_GEN_VAR_TEC_TAG.csv","a")
-        table_file.write(integer_progressive_ID+','+pubmed_ID+','+\
-                              ensembl_gene_ID+','+variant_name+','+\
-                              tecnique+','+i+','+relationship_note+'\n')
+    for t in tecnique:
+        if t == "" or t.lower() == "null":
+            t = "NULL"
+        t=('"'+t+'"')     
+        for i in keyword_tags:
+            if i == "" or i.lower() == "null":
+                i = "NULL"
+            i=('"'+i+'"')
+            table_file=open("PUB_GEN_VAR_TEC_TAG.csv","a")
+            table_file.write(integer_progressive_ID+','+pubmed_ID+','+\
+                                  ensembl_gene_ID+','+variant_name+','+\
+                                  t+','+i+','+relationship_note+'\n')
 
 def relational_table_repeat():
     repeat=True
