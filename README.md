@@ -1,3 +1,5 @@
+![alt text](https://github.com/emanuele-tufarini/miqualat/blob/main/other_material/miqualat_workflow.png)
+
 ### Required Python Libraries
 ***
 The following libraries are required for use miqualat notebooks. <br>
