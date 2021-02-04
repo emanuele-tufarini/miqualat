@@ -50,11 +50,11 @@ CREATE TABLE TAG (
 	PRIMARY KEY (keyword_tags)
 );
 
-CREATE TABLE KEGG (
-	kegg_ID VARCHAR (20) NOT NULL,
-	kegg_object_type VARCHAR (30) NOT NULL,
-	kegg_object_name VARCHAR (300) NOT NULL,
-	PRIMARY KEY (kegg_ID)
+CREATE TABLE DB (
+	database_ID VARCHAR (50) NOT NULL,
+	database_object_type VARCHAR (200) NOT NULL,
+	database_object_name VARCHAR (500),
+	PRIMARY KEY (database_ID)
 );
 
 CREATE TABLE PUB_GEN_VAR_TEC_TAG (
@@ -73,10 +73,10 @@ CREATE TABLE PUB_GEN_VAR_TEC_TAG (
 	FOREIGN KEY (keyword_tags) REFERENCES TAG (keyword_tags)
 );
 
-CREATE TABLE GEN_KEGG (
+CREATE TABLE GEN_DB (
 	ensembl_gene_ID VARCHAR (20) NOT NULL,
-	kegg_ID VARCHAR (20) NOT NULL,
-	PRIMARY KEY (ensembl_gene_ID, kegg_ID),
+	database_ID VARCHAR (20) NOT NULL,
+	PRIMARY KEY (ensembl_gene_ID, database_ID),
 	FOREIGN KEY (ensembl_gene_ID) REFERENCES GENE (ensembl_gene_ID),
-	FOREIGN KEY (kegg_ID) REFERENCES KEGG (kegg_ID)
+	FOREIGN KEY (database_ID) REFERENCES DB (database_ID)
 );

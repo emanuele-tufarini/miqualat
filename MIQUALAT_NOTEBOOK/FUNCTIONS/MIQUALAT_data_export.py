@@ -22,8 +22,8 @@ def miqualat_db_data_exporter():
     #definizione di una variabile locale di tipo dizionario per la selezione delle tabelle su cui operare l'export dei dati dal database MIQUALAT#
     table_dict={
     "1":"GENE",
-    "2":"KEGG",
-    "3":"GEN_KEGG",
+    "2":"DB",
+    "3":"GEN_DB",
     "4":"PUBLICATION",
     "5":"TECNIQUE",
     "6":"TAG",
@@ -61,8 +61,8 @@ def miqualat_db_data_exporter():
     #definizione di una variabile locale di tipo dizionario per l'allocazione degli attributi/fields di ogni tabella del db MIQUALAT#
     field_dictionary={
     "GENE":["ensembl_gene_ID","gene_name","gene_short_description","refseq","species","chromosome","start_coordinate","end_coordinate","strand"],
-    "KEGG":["kegg_ID","kegg_object_type","kegg_object_name"],
-    "GEN_KEGG":["ensembl_gene_ID","kegg_ID"],
+    "DB":["database_ID","database_object_type","database_object_name"],
+    "GEN_DB":["ensembl_gene_ID","database_ID"],
     "PUBLICATION":["pubmed_ID","doi","article_title","article_authors","article_journal","publication_year"],
     "TECNIQUE":["tecnique","tecnique_short_description"],
     "TAG":["keyword_tags","tags_short_description"],
@@ -100,7 +100,7 @@ def miqualat_db_data_exporter():
                                     "1":"SELECT * FROM GENE;",
                                     "2":"SELECT * FROM GENE WHERE GENE.ensembl_gene_ID=\'%s\';",
                                     "3":"SELECT * FROM GENE WHERE GENE.gene_name=\'%s\';",
-                                    "4":"SELECT GENE.species,GENE.refseq FROM GENE GROUP BY GENE.species,GENE.refseq;",
+                                    "4":"SELECT DISTINCT GENE.species,GENE.refseq FROM GENE;",
                                     "5":"SELECT GENE.species,COUNT(*) FROM GENE GROUP BY GENE.species;",
                                     "6":"SELECT * FROM GENE WHERE GENE.species=\'%s\';",
                                     "7":"SELECT * FROM GENE WHERE GENE.chromosome=%s AND GENE.species=\'%s\';",
@@ -208,9 +208,9 @@ def miqualat_db_data_exporter():
                     "\n6: to extract pubmed_ID,doi,article_title and ensembl_gene_ID and gene_name of all publications and genes related to an input keyword_tag;",
                     "\n7: to extract ensembl_gene_ID and gene_name of all genes related to an input variant_name;",
                     "\n8: to extract all tecnique informations of all tecniques related to an input pubmed_ID;",
-                    "\n9: to extract all kegg_ID informations of all kegg_IDs (gene, pathway, protein, enzyme...etc.) related to an input pubmed_ID;",
-                    "\n10: to extract pubmed_ID,doi,article_title,ensembl_gene_ID and gene_name of all publications and genes related to an input kegg_ID (kegg code of gene, pathway, protein, enzyme...etc.);",
-                    "\n11: to extract pubmed_ID,doi,article_title,ensembl_gene_ID and gene_name of all publications and genes related to an input compound name to search into kegg_object_name;",
+                    "\n9: to extract all database_ID informations of all database_IDs (gene, pathway, protein, enzyme...etc.) related to an input pubmed_ID;",
+                    "\n10: to extract pubmed_ID,doi,article_title,ensembl_gene_ID and gene_name of all publications and genes related to an input database_ID (database code of gene, pathway, protein, enzyme...etc.);",
+                    "\n11: to extract pubmed_ID,doi,article_title,ensembl_gene_ID and gene_name of all publications and genes related to an input compound name to search into database_object_name;",
                     "\n12: to extract all record fields and gene_name related to an input pubmed_ID;",
                     "\n13: to extract all record fields and gene_name related to an input doi;",
                     "\n14: to extract pubmed_ID,doi,article_title and tecnique_name and keyword_tag related to an input ensembl_gene_ID;",
@@ -230,9 +230,9 @@ def miqualat_db_data_exporter():
                                                             "6":"SELECT DISTINCT PUB_GEN_VAR_TEC_TAG.keyword_tags,PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUBLICATION.doi,PUBLICATION.article_title,PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,GENE.gene_name FROM PUBLICATION,PUB_GEN_VAR_TEC_TAG,GENE WHERE PUBLICATION.pubmed_ID=PUB_GEN_VAR_TEC_TAG.pubmed_ID AND PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=GENE.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.keyword_tags=\'%s\';",
                                                             "7":"SELECT DISTINCT PUB_GEN_VAR_TEC_TAG.variant_name,PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,GENE.gene_name FROM PUB_GEN_VAR_TEC_TAG,GENE WHERE PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=GENE.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.variant_name=\'%s\';",
                                                             "8":"SELECT DISTINCT PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUB_GEN_VAR_TEC_TAG.tecnique,TECNIQUE.tecnique_short_description FROM PUB_GEN_VAR_TEC_TAG,TECNIQUE WHERE PUB_GEN_VAR_TEC_TAG.tecnique=TECNIQUE.tecnique AND PUB_GEN_VAR_TEC_TAG.pubmed_ID=%s;",
-                                                            "9":"SELECT DISTINCT PUB_GEN_VAR_TEC_TAG.pubmed_ID,GEN_KEGG.kegg_ID,KEGG.kegg_object_type,KEGG.kegg_object_name FROM PUB_GEN_VAR_TEC_TAG,GENE,GEN_KEGG,KEGG WHERE PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=GENE.ensembl_gene_ID AND GENE.ensembl_gene_ID=GEN_KEGG.ensembl_gene_ID AND GEN_KEGG.kegg_ID=KEGG.kegg_ID AND PUB_GEN_VAR_TEC_TAG.pubmed_ID=%s;",
-                                                            "10":"SELECT DISTINCT GEN_KEGG.kegg_ID,GEN_KEGG.ensembl_gene_ID,GENE.gene_name,PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUBLICATION.doi,PUBLICATION.article_title FROM GEN_KEGG,GENE,PUB_GEN_VAR_TEC_TAG,PUBLICATION WHERE GEN_KEGG.ensembl_gene_ID=GENE.ensembl_gene_ID AND GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.pubmed_ID=PUBLICATION.pubmed_ID AND GEN_KEGG.kegg_ID=\'%s\';",
-                                                            "11":"SELECT DISTINCT KEGG.kegg_object_name,GEN_KEGG.ensembl_gene_ID,GENE.gene_name,PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUBLICATION.doi,PUBLICATION.article_title FROM KEGG,GEN_KEGG,GENE,PUB_GEN_VAR_TEC_TAG,PUBLICATION WHERE KEGG.kegg_ID=GEN_KEGG.kegg_ID AND GEN_KEGG.ensembl_gene_ID=GENE.ensembl_gene_ID AND GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.pubmed_ID=PUBLICATION.pubmed_ID AND KEGG.kegg_object_name LIKE \'%%%s%%\';",
+                                                            "9":"SELECT DISTINCT PUB_GEN_VAR_TEC_TAG.pubmed_ID,GEN_DB.database_ID,DB.database_object_type,DB.database_object_name FROM PUB_GEN_VAR_TEC_TAG,GENE,GEN_DB,DB WHERE PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=GENE.ensembl_gene_ID AND GENE.ensembl_gene_ID=GEN_DB.ensembl_gene_ID AND GEN_DB.database_ID=DB.database_ID AND PUB_GEN_VAR_TEC_TAG.pubmed_ID=%s;",
+                                                            "10":"SELECT DISTINCT GEN_DB.database_ID,GEN_DB.ensembl_gene_ID,GENE.gene_name,PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUBLICATION.doi,PUBLICATION.article_title FROM GEN_DB,GENE,PUB_GEN_VAR_TEC_TAG,PUBLICATION WHERE GEN_DB.ensembl_gene_ID=GENE.ensembl_gene_ID AND GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.pubmed_ID=PUBLICATION.pubmed_ID AND GEN_DB.database_ID=\'%s\';",
+                                                            "11":"SELECT DISTINCT DB.database_object_name,GEN_DB.ensembl_gene_ID,GENE.gene_name,PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUBLICATION.doi,PUBLICATION.article_title FROM DB,GEN_DB,GENE,PUB_GEN_VAR_TEC_TAG,PUBLICATION WHERE DB.database_ID=GEN_DB.database_ID AND GEN_DB.ensembl_gene_ID=GENE.ensembl_gene_ID AND GENE.ensembl_gene_ID=PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.pubmed_ID=PUBLICATION.pubmed_ID AND DB.database_object_name LIKE \'%%%s%%\';",
                                                             "12":"SELECT PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,GENE.gene_name,PUB_GEN_VAR_TEC_TAG.variant_name,PUB_GEN_VAR_TEC_TAG.tecnique,PUB_GEN_VAR_TEC_TAG.keyword_tags,PUB_GEN_VAR_TEC_TAG.relationship_note FROM PUB_GEN_VAR_TEC_TAG,GENE WHERE PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=GENE.ensembl_gene_ID AND PUB_GEN_VAR_TEC_TAG.pubmed_ID=%s;",
                                                             "13":"SELECT PUBLICATION.doi,PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,GENE.gene_name,PUB_GEN_VAR_TEC_TAG.variant_name,PUB_GEN_VAR_TEC_TAG.tecnique,PUB_GEN_VAR_TEC_TAG.keyword_tags,PUB_GEN_VAR_TEC_TAG.relationship_note FROM PUBLICATION,PUB_GEN_VAR_TEC_TAG,GENE WHERE PUBLICATION.pubmed_ID=PUB_GEN_VAR_TEC_TAG.pubmed_ID AND PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=GENE.ensembl_gene_ID AND PUBLICATION.doi=\'%s\';",
                                                             "14":"SELECT PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID,PUB_GEN_VAR_TEC_TAG.pubmed_ID,PUBLICATION.doi,PUBLICATION.article_title,PUB_GEN_VAR_TEC_TAG.tecnique,PUB_GEN_VAR_TEC_TAG.keyword_tags FROM PUB_GEN_VAR_TEC_TAG,PUBLICATION WHERE PUB_GEN_VAR_TEC_TAG.pubmed_ID=PUBLICATION.pubmed_ID AND PUB_GEN_VAR_TEC_TAG.ensembl_gene_ID=\'%s\';",
@@ -353,7 +353,7 @@ def miqualat_db_data_exporter():
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "9"):
-                    result_header=["pubmed_ID","kegg_ID","kegg_object_type","kegg_object_name"]
+                    result_header=["pubmed_ID","database_ID","database_object_type","database_object_name"]
                     pubmed_ID_list=input("\nenter pubmed_ID (i.e. 29024632 or 29024632,29024999,...): ").split(",")
                     pubmed_ID_query_results=[]
                     for pubmed_ID in pubmed_ID_list:
@@ -367,29 +367,29 @@ def miqualat_db_data_exporter():
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "10"):
-                    result_header=["kegg_ID","ensembl_gene_ID","gene_name","pubmed_ID","doi","article_title"]
-                    kegg_ID_list=input("\nenter kegg_ID (kegg code of gene, pathway, protein, enzyme...etc.)(i.e. bta:281495 or bta:281495,bta:281210,bta:615507,...): ").split(",")
-                    kegg_ID_query_results=[]
-                    for kegg_ID in kegg_ID_list:
-                        cursor.execute(pub_gen_var_tec_tag_queries[code] % kegg_ID)
+                    result_header=["database_ID","ensembl_gene_ID","gene_name","pubmed_ID","doi","article_title"]
+                    database_ID_list=input("\nenter database_ID (database code of gene, pathway, protein, enzyme...etc.)(i.e. bta:281495 or bta:281495,bta:281210,bta:615507,...,GO:0016607,R-BTA-6798695): ").split(",")
+                    database_ID_query_results=[]
+                    for database_ID in database_ID_list:
+                        cursor.execute(pub_gen_var_tec_tag_queries[code] % database_ID)
                         query_results=[list(query_result) for query_result in cursor]
                         for result in query_results:
-                            kegg_ID_query_results.append(result)
-                    result_df=pd.DataFrame.from_records(data=kegg_ID_query_results,columns=result_header)
+                            database_ID_query_results.append(result)
+                    result_df=pd.DataFrame.from_records(data=database_ID_query_results,columns=result_header)
                     display(result_df)
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "11"):
-                    result_header=["kegg_object_name","ensembl_gene_ID","gene_name","pubmed_ID","doi","article_title"]
-                    kegg_obj_name_list=input("\nenter compound name to search into kegg_object_name (i.e. glutathione or glutathione,other molecules name): ").split(",")
-                    kegg_obj_name_query_results=[]
-                    for kegg_obj_name in kegg_obj_name_list:
-                        cursor.execute(pub_gen_var_tec_tag_queries[code] % kegg_obj_name)
+                    result_header=["database_object_name","ensembl_gene_ID","gene_name","pubmed_ID","doi","article_title"]
+                    database_obj_name_list=input("\nenter compound name to search into database_object_name (i.e. glutathione or glutathione,other molecules name,biological processes name): ").split(",")
+                    database_obj_name_query_results=[]
+                    for database_obj_name in database_obj_name_list:
+                        cursor.execute(pub_gen_var_tec_tag_queries[code] % database_obj_name)
                         query_results=[list(query_result) for query_result in cursor]
                         for result in query_results:
-                            kegg_obj_name_query_results.append(result)
-                    result_df=pd.DataFrame.from_records(data=kegg_obj_name_query_results,columns=result_header)
+                            database_obj_name_query_results.append(result)
+                    result_df=pd.DataFrame.from_records(data=database_obj_name_query_results,columns=result_header)
                     display(result_df)
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
@@ -800,34 +800,34 @@ def miqualat_db_data_exporter():
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")        
 
-        #menu di selezione come parametro di input delle queries specifiche per la tabella GEN_KEGG#
-        if(table_name == "GEN_KEGG"):
+        #menu di selezione come parametro di input delle queries specifiche per la tabella GEN_DB#
+        if(table_name == "GEN_DB"):
             print(
-                    "\nqueires selection menu to export data from table GEN_KEGG:\n",
+                    "\nqueires selection menu to export data from table GEN_DB:\n",
                     "\n1: to extract all table records;",
-                    "\n2: to extract kegg_id,ensembl_gene_ID,gene_name,species of all genes relative to an input compound name (or pathway or molecule) to search into field kegg_object_name;",
-                    "\n3: to extract all KEGG record fields related to an input species and an input kegg_object_type (gene, pathway, protein, enzyme or others);"
+                    "\n2: to extract database_id,ensembl_gene_ID,gene_name,species of all genes relative to an input compound name (or pathway or molecule) to search into field database_object_name;",
+                    "\n3: to extract all DB record fields related to an input species and an input database_object_type (gene, pathway, protein, enzyme, biological process, molecular function or others);"
                     ) 
 
-            #variabili richieste come parametri di input all'utente: queries selezionate per l'export dalla tabella GEN_KEGG del database MIQUALAT#
-            gen_kegg_query_selection=input("\nenter GEN_KEGG table queries selection numbers (i.e. 4 or 1,2,3): ")        
+            #variabili richieste come parametri di input all'utente: queries selezionate per l'export dalla tabella GEN_DB del database MIQUALAT#
+            gen_db_query_selection=input("\nenter GEN_DB table queries selection numbers (i.e. 4 or 1,2,3): ")        
 
-            #dizionario delle queries specifiche per la tabella GEN_KEGG#
-            gen_kegg_queries={
-                                          "1":"SELECT * FROM GEN_KEGG;",
-                                          "2":"SELECT KEGG.kegg_object_name,GEN_KEGG.kegg_ID,GEN_KEGG.ensembl_gene_ID,GENE.gene_name,GENE.species FROM KEGG,GEN_KEGG,GENE WHERE KEGG.kegg_ID=GEN_KEGG.kegg_ID AND GEN_KEGG.ensembl_gene_ID=GENE.ensembl_gene_ID AND KEGG.kegg_object_name LIKE \'%%%s%%\';",
-                                          "3":"SELECT KEGG.*,GENE.species FROM KEGG,GEN_KEGG,GENE WHERE KEGG.kegg_ID=GEN_KEGG.kegg_ID AND GEN_KEGG.ensembl_gene_ID=GENE.ensembl_gene_ID AND KEGG.kegg_object_type=\'%s\' AND GENE.species=\'%s\';"
+            #dizionario delle queries specifiche per la tabella GEN_DB#
+            gen_db_queries={
+                                          "1":"SELECT * FROM GEN_DB;",
+                                          "2":"SELECT DB.database_object_name,GEN_DB.database_ID,GEN_DB.ensembl_gene_ID,GENE.gene_name,GENE.species FROM DB,GEN_DB,GENE WHERE DB.database_ID=GEN_DB.database_ID AND GEN_DB.ensembl_gene_ID=GENE.ensembl_gene_ID AND DB.database_object_name LIKE \'%%%s%%\';",
+                                          "3":"SELECT DB.*,GENE.species FROM DB,GEN_DB,GENE WHERE DB.database_ID=GEN_DB.database_ID AND GEN_DB.ensembl_gene_ID=GENE.ensembl_gene_ID AND DB.database_object_type=\'%s\' AND GENE.species=\'%s\';"
                                          }
 
-            #esecuzione sul database delle queries selezionate in input dall'utente per l'export dei dati dalla tabella GEN_KEGG#
-            for code in gen_kegg_query_selection.split(","): 
+            #esecuzione sul database delle queries selezionate in input dall'utente per l'export dei dati dalla tabella GEN_DB#
+            for code in gen_db_query_selection.split(","): 
 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
                 save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
 
                 if(code == "1"):
-                    result_header=field_dictionary["GEN_KEGG"]
-                    cursor.execute(gen_kegg_queries[code])
+                    result_header=field_dictionary["GEN_DB"]
+                    cursor.execute(gen_db_queries[code])
                     query_results=[list(query_result) for query_result in cursor]
                     result_df=pd.DataFrame.from_records(data=query_results,columns=result_header)
                     display(result_df)
@@ -835,22 +835,22 @@ def miqualat_db_data_exporter():
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "2"):
-                    result_header=["kegg_object_name","kegg_ID","ensembl_gene_ID","gene_name","species"]
-                    kegg_obj_name_list=input("\nenter compound name to search into kegg_object_name (i.e. glutathione or glutathione,other molecules name,pathways name): ").split(",")
-                    kegg_obj_name_query_results=[]
-                    for kegg_obj_name in kegg_obj_name_list:
-                        cursor.execute(gen_kegg_queries[code] % kegg_obj_name)
+                    result_header=["database_object_name","database_ID","ensembl_gene_ID","gene_name","species"]
+                    db_obj_name_list=input("\nenter compound name to search into database_object_name (i.e. glutathione or glutathione,other molecules name,pathways name): ").split(",")
+                    db_obj_name_query_results=[]
+                    for db_obj_name in db_obj_name_list:
+                        cursor.execute(gen_db_queries[code] % db_obj_name)
                         query_results=[list(query_result) for query_result in cursor]
                         for result in query_results:
-                            kegg_obj_name_query_results.append(result)
-                    result_df=pd.DataFrame.from_records(data=kegg_obj_name_query_results,columns=result_header)
+                            db_obj_name_query_results.append(result)
+                    result_df=pd.DataFrame.from_records(data=db_obj_name_query_results,columns=result_header)
                     display(result_df)
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "3"):
-                    result_header=["kegg_ID","kegg_object_type","kegg_object_name","species"]
-                    cursor.execute(gen_kegg_queries[code] % (input("\nenter kegg_object_type (i.e. gene or pathway or protein or enzyme or others): "),input("\nenter species (i.e. Bos taurus or Homo sapiens): ")))
+                    result_header=["database_ID","database_object_type","database_object_name","species"]
+                    cursor.execute(gen_db_queries[code] % (input("\nenter database_object_type (i.e. gene or pathway or protein or enzyme or biological process or molecular function or others): "),input("\nenter species (i.e. Bos taurus or Homo sapiens): ")))
                     query_results=[list(query_result) for query_result in cursor]
                     result_df=pd.DataFrame.from_records(data=query_results,columns=result_header)
                     display(result_df)
@@ -858,34 +858,33 @@ def miqualat_db_data_exporter():
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")   
         
-        #menu di selezione come parametro di input delle queries specifiche per la tabella KEGG#
-        if(table_name == "KEGG"):
+        #menu di selezione come parametro di input delle queries specifiche per la tabella DB#
+        if(table_name == "DB"):
             print(
-                    "\nqueires selection menu to export data from table KEGG:\n",
+                    "\nqueires selection menu to export data from table DB:\n",
                     "\n1: to extract all table records;",
-                    "\n2: to extract all record fields relative to an input kegg_ID;",
-                    "\n3: to extract all record fields relative to an input compound name (or pathway or molecule) to search into field kegg_object_name;"
+                    "\n2: to extract all record fields relative to an input database_ID;",
+                    "\n3: to extract all record fields relative to an input compound name (or pathway or molecule) to search into field database_object_name;"
                     ) 
 
-            #variabili richieste come parametri di input all'utente: queries selezionate per l'export dalla tabella KEGG del database MIQUALAT#
-            kegg_query_selection=input("\nenter KEGG table queries selection numbers (i.e. 4 or 1,2,3): ")
+            #variabili richieste come parametri di input all'utente: queries selezionate per l'export dalla tabella DB del database MIQUALAT#
+            db_query_selection=input("\nenter DB table queries selection numbers (i.e. 4 or 1,2,3): ")
 
-            #dizionario delle queries specifiche per la tabella KEGG#
-            kegg_queries={
-                                   "1":"SELECT * FROM KEGG;",
-                                   "2":"SELECT KEGG.* FROM KEGG WHERE KEGG.kegg_ID=\'%s\';",
-                                   "3":"SELECT KEGG.* FROM KEGG WHERE KEGG.kegg_object_name LIKE \'%%%s%%\';"
+            #dizionario delle queries specifiche per la tabella DB#
+            db_queries={
+                                   "1":"SELECT * FROM DB;",
+                                   "2":"SELECT DB.* FROM DB WHERE DB.database_ID=\'%s\';",
+                                   "3":"SELECT DB.* FROM DB WHERE DB.database_object_name LIKE \'%%%s%%\';"
                                   }
             
-            #esecuzione sul database delle queries selezionate in input dall'utente per l'export dei dati dalla tabella GEN_KEGG#
-            for code in kegg_query_selection.split(","): 
+            #esecuzione sul database delle queries selezionate in input dall'utente per l'export dei dati dalla tabella DB#
+            for code in db_query_selection.split(","): 
 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
                 save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
-
                 if(code == "1"):
-                    result_header=field_dictionary["KEGG"]
-                    cursor.execute(kegg_queries[code])
+                    result_header=field_dictionary["DB"]
+                    cursor.execute(db_queries[code])
                     query_results=[list(query_result) for query_result in cursor]
                     result_df=pd.DataFrame.from_records(data=query_results,columns=result_header)
                     display(result_df)
@@ -893,29 +892,29 @@ def miqualat_db_data_exporter():
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "2"):
-                    result_header=field_dictionary["KEGG"]
-                    kegg_ID_list=input("\nenter kegg_ID (kegg code of gene, pathway, protein, enzyme...etc.)(i.e. bta:281495 or bta:281495,bta:281210,bta:615507,...): ").split(",")
-                    kegg_ID_query_results=[]
-                    for kegg_ID in kegg_ID_list:
-                        cursor.execute(kegg_queries[code] % kegg_ID)
+                    result_header=field_dictionary["DB"]
+                    db_ID_list=input("\nenter database_ID (database code of gene, pathway, protein, enzyme...etc.)(i.e. bta:281495 or bta:281495,bta:281210,bta:615507,...,GO:0016607,R-BTA-6798695): ").split(",")
+                    db_ID_query_results=[]
+                    for db_ID in db_ID_list:
+                        cursor.execute(db_queries[code] % db_ID)
                         query_results=[list(query_result) for query_result in cursor]
                         for result in query_results:
-                            kegg_ID_query_results.append(result)
-                    result_df=pd.DataFrame.from_records(data=kegg_ID_query_results,columns=result_header)
+                            db_ID_query_results.append(result)
+                    result_df=pd.DataFrame.from_records(data=db_ID_query_results,columns=result_header)
                     display(result_df)
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
                         result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "3"):
-                    result_header=field_dictionary["KEGG"]
-                    kegg_obj_name_list=input("\nenter compound name to search into kegg_object_name (i.e. glutathione or glutathione,other molecules name,pathways name): ").split(",")
-                    kegg_obj_name_query_results=[]
-                    for kegg_obj_name in kegg_obj_name_list:
-                        cursor.execute(kegg_queries[code] % kegg_obj_name)
+                    result_header=field_dictionary["DB"]
+                    db_obj_name_list=input("\nenter compound name to search into database_object_name (i.e. glutathione or glutathione,other molecules name,pathways name): ").split(",")
+                    db_obj_name_query_results=[]
+                    for db_obj_name in db_obj_name_list:
+                        cursor.execute(db_queries[code] % db_obj_name)
                         query_results=[list(query_result) for query_result in cursor]
                         for result in query_results:
-                            kegg_obj_name_query_results.append(result)
-                    result_df=pd.DataFrame.from_records(data=kegg_obj_name_query_results,columns=result_header)
+                            db_obj_name_query_results.append(result)
+                    result_df=pd.DataFrame.from_records(data=db_obj_name_query_results,columns=result_header)
                     display(result_df)
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
