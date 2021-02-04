@@ -11,7 +11,7 @@ def python_parser_biomart_gene_csv(biomart_file, refseq, species, chrom_autosoma
       
     # default value bos taurus
     if biomart_file == "":
-        species = "mart_export.csv"
+        biomart_file = "mart_export.csv"
     if species == "":
         species = "bos taurus"
     if chrom_autosomal == "":
