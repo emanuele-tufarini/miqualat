@@ -24,20 +24,20 @@ Five notebooks have been built, that allow you to search, import and check into 
 1) MIQUALAT_PUBLICATION_data_assess.ipynb <br>
 Carry out searches within the pubmed database, automatize data collection for PUBLICAITON table. <br>
 Creates PUBLICATION.csv file and move all searches (PUBMED_SEARCH_DATA_Y-m-d_H-M-S.txt format) in the OUTPUT folder. <br><br>
-2) MIQUALAT_KEGG_data_assess.ipynb  <br>
-Download genes and pathways from kegg database (from kegg <org> code), automatize data collection for KEGG table. <br>
-Creates ALL_KEGG_GENE.csv (all kegg genes from <org> kegg code) in the OUTPUT folder. <br>
-Creates ALL_KEGG_PATH.csv (all kegg pathways from <org> kegg code) in the OUTPUT folder. <br><br>
+2) MIQUALAT_DB_for_KEGG_data_assess.ipynb <br>
+Download genes and pathways from kegg database (from kegg code), automatize data collection for DB table. <br>
+Creates ALL_KEGG_GENE.csv (all kegg genes from kegg code) in the OUTPUT folder. <br>
+Creates ALL_KEGG_PATH.csv (all kegg pathways from kegg code) in the OUTPUT folder. <br><br>
 3) MIQUALAT_GENE_data_assess.ipynb  <br>
 Allows you to download genes from ensembl database, automatize data collection for GENE table. <br>
 Option 1) get information from specific genes (ensembl gene id required). <br>
 Option 2) convert all genes downloaded from biomart (GENE.csv required). <br>
 In any case  creates GENE.csv and move it in the OUTPUT folder. <br><br>
-4) MIQUALAT_GEN_KEGG_data_assess.ipynb  <br>
-Correlates the ensembl gene id to the kegg id (if possible) of the gene and related pathway, automatize data collection for GEN_KEGG table. <br>
-Option 1) correlates the ensembl gene id to the kegg id of the gene and related pathways for specific gene (ensembl gene id required), for specific gene. <br>
-Option 2) processes the entire GENE.csv file. <br>
-Creates ENS_GENE_ID.csv (Ensembl gene id to Kegg gene id) in the OUTPUT folder. <br>
+4) MIQUALAT_GEN_DB_for_KEGG.ipynb <br>
+Correlates the ensembl gene id to the kegg id (if possible) of the gene and related pathway, automatize data collection for GEN_DB table.<br>
+Option 1) correlates the ensembl gene id to the kegg id of the gene and related pathways for specific gene (ensembl gene id required), for specific gene.<br>
+Option 2) processes the entire GENE.csv file.<br>
+Creates ENS_GENE_ID.csv (Ensembl gene id to Kegg gene id) in the OUTPUT folder.<br>
 Creates ENS_PATH_ID.csv (Ensembl gene id to Kegg pathways id) in the OUTPUT folder. <br><br>
 5) MIQUALAT_manual_table.ipynb <br>
 This notebook use the MIQUALAT_manual_table.py function in FUNCTIONS folder. <br>
@@ -48,7 +48,13 @@ Follow the instructions to create the desired table. <br><br>
 Allows the import of files processed with previous notebooks, once checked. <br>
 Input file are in INPUT folder folder.
 An error control system prevents the import of incorrect information, but import data into the database only when you are sure (racomanded). <br><br>
-7) MIQUALAT_data_export.ipynb                        
+7) MIQUALAT_gene_ontology_notebook.ipynb<br>
+Correlates the ensembl gene id or list of ensembl gene ids to all the gene ontology terms related to the ensembl ids in the entries list;<br>
+and creates the input files GEN_DB.csv and DB.csv to import gene ontology repository data in miqualat database. <br><br>
+8) MIQUALAT_reactome_notebook.ipynb<br>
+Correlates the ensembl gene id or list of ensembl gene ids to all reactome pathway codes related to the ensembl ids in the entries list; <br>
+and creates the input files GEN_DB.csv and DB.csv to import gene ontology repository data in miqualat database. <br><br>
+9) MIQUALAT_data_export.ipynb                        
 Allows you to export data from miqualat database. <br>
 To export the file enter the desired query number. <br>
 File are saved in OUTPUT folder with name table_TABLE_query_number_NUMBER_export_data_results__Y-m-d_h-d-s. <br><br>
@@ -59,6 +65,16 @@ We proposed as variant_name this combination of values <br>
 4. reference allele  <br>
 5. alternative allele (i.e. if the alternative allele is too long, try to find a way to summarize it) <br><br>
 example: hg38_1:146793_A|G <br> <br>
+10) MIQUALAT_data_import_and_check.ipynb<br> 
+Import checks types:<br> 
+- headers check; <br> 
+- entry field number check;<br> 
+- duplicate entry check;<br> 
+- int data type field check;<br> 
+- primary keys check;<br> 
+- foreign keys check;<br> 
+- NULL value field check;<br> <br>
+
 
 ### LINK TO COMPLETE DOCUMENTATION
 ***
