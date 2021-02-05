@@ -86,11 +86,11 @@ def pubmed_search(keyword,keyword_title):
     except:
         pass
     print("\nenter 'exit' for quit or leave empty\n")
-    NumArticle = (input("enter the title number for print the article/s: ")).replace(" ", "")
+    NumArticle = (input("enter the title number for print the article/s (1,2,3,4,5 .. ): ")).replace(" ", "")
     if NumArticle == "exit":
         print("\nsee you later!")
     else:
-        ListNum = re.split("-", NumArticle)
+        ListNum = re.split(",", NumArticle)
         # write selected articles
         PUBLICATION_CSV = open ("PUBLICATION.csv", "w")
         PUBLICATION_CSV.write("pubmed_ID,doi,article_title,article_authors,article_journal,publication_year\n")
