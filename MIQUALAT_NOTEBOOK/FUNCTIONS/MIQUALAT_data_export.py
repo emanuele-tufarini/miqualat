@@ -6,14 +6,14 @@ import getpass
 import datetime
 
 #definizione della funzione di export dei dati dal database MIQUALAT#
-def miqualat_db_data_exporter():
+def miqualat_db_data_exporter(host,db,port):
     
     #variabili richieste come parametri di input all'utente: database username e password#
     user=input("enter your username: ")
-    pswd=getpass.getpass("enter your password: ")
+    passwd=getpass.getpass("enter your password: ")
     
     #CONNESSIONE AL SERVER DOVE È ALLOCATO IL DATABASE#
-    mydb=MySQLdb.connect(host="localhost", user=user, passwd=pswd, db="MIQUALAT")
+    mydb=MySQLdb.connect(host, user, passwd, db, port)
     cursor=mydb.cursor()
     
     #variabile che alloca la data di esecuzione per rinominare il filename di export output#
