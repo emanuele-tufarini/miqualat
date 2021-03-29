@@ -5,10 +5,10 @@ last modification 11-2020
 
 import ensembl_rest
 
-def ensembl_search(species, ensembl_symbol, chrom_autosomal, n):
+def ensembl_search(species,ensembl_symbol,chrom_autosomal,n,name,surname,data):
     try:
         ENSEMBL_DICT = ensembl_rest.symbol_lookup(species,ensembl_symbol)
-        with open("GENE.csv","a") as GENE:
+        with open(name + "_" + surname + "_" +  str(data) + "_GENE.csv","a") as GENE:
             marker='['
             DESCRIPTION=ENSEMBL_DICT.get('description')
             if marker in DESCRIPTION:

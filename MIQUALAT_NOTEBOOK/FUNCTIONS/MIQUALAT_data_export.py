@@ -6,14 +6,19 @@ import getpass
 import datetime
 
 #definizione della funzione di export dei dati dal database MIQUALAT#
-def miqualat_db_data_exporter(host,db,port):
+def miqualat_db_data_exporter():
+    
+    #variabili dove sono allocate le informazioni dell'utente per la personalizzazione dell'output
+    print("To customize the output files please enter these credentials: ")
+    name=input("Enter your name: ")
+    surname=input("Enter your surname: ")
     
     #variabili richieste come parametri di input all'utente: database username e password#
     user=input("enter your username: ")
-    passwd=getpass.getpass("enter your password: ")
+    pswd=getpass.getpass("enter your password: ")
     
     #CONNESSIONE AL SERVER DOVE È ALLOCATO IL DATABASE#
-    mydb=MySQLdb.connect(host, user, passwd, db, port)
+    mydb=MySQLdb.connect(host="localhost", user=user, passwd=pswd, db="MIQUALAT")
     cursor=mydb.cursor()
     
     #variabile che alloca la data di esecuzione per rinominare il filename di export output#
@@ -111,7 +116,7 @@ def miqualat_db_data_exporter(host,db,port):
             for code in gene_query_selection.split(","):
                 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
-                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"
+                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+name+"_"+surname+"_"+str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"
                 
                 if(code == "1"):
                     result_header=field_dictionary["GENE"]
@@ -158,7 +163,7 @@ def miqualat_db_data_exporter(host,db,port):
                     display(result_df)
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
-                        result_df.to_csv(path_or_buf="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_" + str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv",sep=",",header=True,index=False,na_rep="NULL")
+                        result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "5"):
                     result_header=[field_dictionary["GENE"][4],"COUNT(genes)"]
                     cursor.execute(gene_queries[code])
@@ -243,7 +248,7 @@ def miqualat_db_data_exporter(host,db,port):
             for code in pub_gen_var_tec_tag_query_selection.split(","):
                 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
-                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"
+                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+name+"_"+surname+"_"+str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"
                 
                 if(code == "1"):
                     result_header=field_dictionary["PUB_GEN_VAR_TEC_TAG"]
@@ -474,7 +479,7 @@ def miqualat_db_data_exporter(host,db,port):
             for code in tecnique_query_selection.split(","):
                 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
-                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"
+                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+name+"_"+surname+"_"+str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"
                 
                 if(code == "1"):
                     result_header=field_dictionary["TECNIQUE"]
@@ -539,7 +544,7 @@ def miqualat_db_data_exporter(host,db,port):
             for code in tag_query_selection.split(","): 
 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
-                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"
+                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+name+"_"+surname+"_"+str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"
 
                 if(code == "1"):
                     result_header=field_dictionary["TAG"]
@@ -622,7 +627,7 @@ def miqualat_db_data_exporter(host,db,port):
             for code in publication_query_selection.split(","): 
 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
-                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
+                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+name+"_"+surname+"_"+str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
 
                 if(code == "1"):
                     result_header=field_dictionary["PUBLICATION"]
@@ -733,7 +738,7 @@ def miqualat_db_data_exporter(host,db,port):
             for code in variant_query_selection.split(","): 
 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
-                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
+                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+name+"_"+surname+"_"+str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
 
                 if(code == "1"):
                     result_header=field_dictionary["VARIANT"]
@@ -823,7 +828,7 @@ def miqualat_db_data_exporter(host,db,port):
             for code in gen_db_query_selection.split(","): 
 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
-                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
+                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+name+"_"+surname+"_"+str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
 
                 if(code == "1"):
                     result_header=field_dictionary["GEN_DB"]
@@ -881,7 +886,7 @@ def miqualat_db_data_exporter(host,db,port):
             for code in db_query_selection.split(","): 
 
                 #allocazione di una variabile di tipo stringa per memorizzare il path dinamico di salvataggio del file .csv di export dalle varie tabelle#
-                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+ str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
+                save_file_path="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_"+name+"_"+surname+"_"+           str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv"         
                 if(code == "1"):
                     result_header=field_dictionary["DB"]
                     cursor.execute(db_queries[code])

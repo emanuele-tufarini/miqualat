@@ -7,7 +7,7 @@ last modification 11-2020
 #import modules
 import csv
 
-def python_parser_biomart_gene_csv(biomart_file, refseq, species, chrom_autosomal):
+def python_parser_biomart_gene_csv(biomart_file,refseq,species,chrom_autosomal,name,surname,data):
       
     # default value bos taurus
     if biomart_file == "":
@@ -39,7 +39,7 @@ def python_parser_biomart_gene_csv(biomart_file, refseq, species, chrom_autosoma
     bos_taurus_total_genes=0
 
     biomart_genes_file=open(biomart_file,"r")
-    final_genes_file=open("./GENE.csv","w")
+    final_genes_file=open("./"+ name + "_" + surname + "_" +  str(data) + "_GENE.csv","w")
     csv_data=csv.reader(biomart_genes_file,delimiter=",")
     csv_writer=csv.writer(final_genes_file)
 

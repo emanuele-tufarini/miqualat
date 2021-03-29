@@ -9,13 +9,16 @@ from Bio import Entrez, Medline
 Entrez.email = input("insert your e-mail: ") 
 
 def pubmed_search(keyword,keyword_title):
-    
+
+    name = input ("Enter your name: ") 
+    surname = input ("Enter your surname: ") 
     data = datetime.datetime.now()
     data = ("_" + str(data.year) + "-" + str(data.month) + "-" + \
             str(data.day) + "_" + str( int (data.hour)) + "-" + \
             str(data.minute) + "-" + str(data.second))
+    print("\n")
     
-    PUBMED_SEARCH_FILE_NAME = "PUBMED_SEARCH" + str(data) + ".txt"
+    PUBMED_SEARCH_FILE_NAME = name + "_" + surname + "_" +  str(data) + "_PUBMED_SEARCH" + ".txt"
     PUBMED_SEARCH=open(PUBMED_SEARCH_FILE_NAME,"w")
     PUBMED_SEARCH.write(keyword+"\n"+keyword_title+"\n\n")
     PUBMED_SEARCH=open(PUBMED_SEARCH_FILE_NAME,"a")
@@ -92,11 +95,11 @@ def pubmed_search(keyword,keyword_title):
     else:
         ListNum = re.split(",", NumArticle)
         # write selected articles
-        PUBLICATION_CSV = open ("PUBLICATION.csv", "w")
+        PUBLICATION_CSV = open (name + "_" + surname + "_" +  str(data) + "_PUBLICATION" + ".csv", "w")
         PUBLICATION_CSV.write("pubmed_ID,doi,article_title,article_authors,article_journal,publication_year\n")
         for Num in ListNum:
             try:
-                PUBLICATION_CSV = open ("PUBLICATION.csv", "a")
+                PUBLICATION_CSV = open (name + "_" + surname + "_" +  str(data) + "_PUBLICATION.csv", "a")
                 for PMID in DizPMID:
                     for record in records:
                         if DizPMID[int(Num)] in record["PMID"]:

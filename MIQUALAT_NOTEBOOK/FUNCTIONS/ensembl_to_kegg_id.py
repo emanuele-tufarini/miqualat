@@ -25,10 +25,10 @@ from Bio.KEGG import REST
 #kegg.REST, ncbi_gene_id > kegg_gene_id > kegg_pathway_id
 #
 
-def ensembl_to_kegg_id(ENSEMBL_GENEID,n,KEGG_NCBI,NCBI_ID_LIST,KEGG_ID_LIST,GENE_PATH,GENE_KEGG_ID,PATH_KEGG_ID):
+def ensembl_to_kegg_id(ENSEMBL_GENEID,n,KEGG_NCBI,NCBI_ID_LIST,KEGG_ID_LIST,GENE_PATH,GENE_KEGG_ID,PATH_KEGG_ID,name,surname,data):
     #apri i file in append
-    ENS_GENE_ID=open("ENS_GENE_ID.csv","a")
-    ENS_PATH_ID=open("ENS_PATH_ID.csv","a")    
+    ENS_GENE_ID=open(name + "_" + surname + "_" +  str(data) + "_ENS_GENE_ID.csv","a")
+    ENS_PATH_ID=open(name + "_" + surname + "_" +  str(data) + "_ENS_PATH_ID.csv","a")    
     #catch error
     try:
         mg = mygene.MyGeneInfo()
@@ -65,7 +65,7 @@ def ensembl_to_kegg_id(ENSEMBL_GENEID,n,KEGG_NCBI,NCBI_ID_LIST,KEGG_ID_LIST,GENE
             if type(ind_path) == int:
                 #scrivi il nome della path nel file
                 KEGG_PATH_ID=(PATH_KEGG_ID[ind_path])
-                ENS_PATH_ID=open("ENS_PATH_ID.csv","a")
+                ENS_PATH_ID=open(name + "_" + surname + "_" +  str(data) + "_ENS_PATH_ID.csv","a")
                 ENS_PATH_ID.write('"'+str(ENSEMBL_GENEID)+'","'+str(KEGG_PATH_ID)+'"\n')  
                 print("ENSEMBL_ID | ",ENSEMBL_GENEID," | PATH_ID | ",KEGG_PATH_ID)
             #se invece e' presente una lista di indici, quindi piu' path per gene
