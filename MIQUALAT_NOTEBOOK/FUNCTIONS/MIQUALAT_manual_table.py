@@ -33,7 +33,7 @@ def relational_table(name,surname,data):
             if i == "" or i.lower() == "null":
                 i = "NULL"
             i=('"'+i+'"')
-            table_file=open(name + "_" + surname + "_" +  str(data) + "_PUB_GEN_VAR_TEC_TAG.csv","a")
+            table_file=open(name + "_" + surname + str(data) + "_PUB_GEN_VAR_TEC_TAG.csv","a")
             table_file.write(integer_progressive_ID+','+pubmed_ID+','+\
                                   ensembl_gene_ID+','+variant_name+','+\
                                   t+','+i+','+relationship_note+'\n')
@@ -51,7 +51,7 @@ def relational_table_repeat(name,surname,data):
 #relational table more genes at a time
 
 def relational_table_list_of_gene(name,surname,data):
-    table_file=open(name + "_" + surname + "_" +  str(data) + "_PUB_GEN_VAR_TEC_TAG.csv","a")
+    table_file=open(name + "_" + surname + str(data) + "_PUB_GEN_VAR_TEC_TAG.csv","a")
     entry_matrix=[]
     integer_progressive_ID="NULL"
     integer_progressive_ID='"'+integer_progressive_ID+'"'
@@ -112,7 +112,7 @@ def tag_table(name,surname,data):
         tags_short_description=input("enter tags_short_description (ex prevent or slow damage to cells caused by free radicals), cannot be NULL (empty): ")
     keyword_tags=('"'+keyword_tags+'"') 
     tags_short_description=('"'+tags_short_description+'"')   
-    table_file=open(name + "_" + surname + "_" +  str(data) + "_TAG.csv","a")
+    table_file=open(name + "_" + surname + str(data) + "_TAG.csv","a")
     table_file.write(keyword_tags+','+tags_short_description+"\n")
 
 
@@ -138,7 +138,7 @@ def tecnique_table(name,surname,data):
         tecnique_short_description=input("enter tecnique_short_description (ex quantitative polymerase chain reaction), cannot be NULL (empty): ")    
     tecnique='"'+tecnique+'"'    
     tecnique_short_description='"'+tecnique_short_description+'"'    
-    table_file=open(name + "_" + surname + "_" +  str(data) + "_TECNIQUE.csv","a")
+    table_file=open(name + "_" + surname + str(data) + "_TECNIQUE.csv","a")
     table_file.write(tecnique+','+tecnique_short_description+"\n")
 
 def tecnique_table_repeat(name,surname,data):
@@ -201,7 +201,7 @@ def variant_table(name,surname,data):
     species='"'+species+'"'      
     refseq='"'+refseq+'"'
     
-    table_file=open(name + "_" + surname + "_" +  str(data) + "_VARIANT.csv","a")
+    table_file=open(name + "_" + surname + str(data) + "_VARIANT.csv","a")
     table_file.write(variant_name+','+variant_type+','+chromosome+','+position+\
                           ','+reference_allele+','+alternative_allele+','+rs_ID+','+species+','+refseq+"\n")
 

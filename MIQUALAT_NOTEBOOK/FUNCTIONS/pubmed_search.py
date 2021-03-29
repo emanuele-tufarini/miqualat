@@ -18,7 +18,7 @@ def pubmed_search(keyword,keyword_title):
             str(data.minute) + "-" + str(data.second))
     print("\n")
     
-    PUBMED_SEARCH_FILE_NAME = name + "_" + surname + "_" +  str(data) + "_PUBMED_SEARCH" + ".txt"
+    PUBMED_SEARCH_FILE_NAME = name + "_" + surname + str(data) + "_PUBMED_SEARCH" + ".txt"
     PUBMED_SEARCH=open(PUBMED_SEARCH_FILE_NAME,"w")
     PUBMED_SEARCH.write(keyword+"\n"+keyword_title+"\n\n")
     PUBMED_SEARCH=open(PUBMED_SEARCH_FILE_NAME,"a")
@@ -95,11 +95,11 @@ def pubmed_search(keyword,keyword_title):
     else:
         ListNum = re.split(",", NumArticle)
         # write selected articles
-        PUBLICATION_CSV = open (name + "_" + surname + "_" +  str(data) + "_PUBLICATION" + ".csv", "w")
+        PUBLICATION_CSV = open (name + "_" + surname + str(data) + "_PUBLICATION" + ".csv", "w")
         PUBLICATION_CSV.write("pubmed_ID,doi,article_title,article_authors,article_journal,publication_year\n")
         for Num in ListNum:
             try:
-                PUBLICATION_CSV = open (name + "_" + surname + "_" +  str(data) + "_PUBLICATION.csv", "a")
+                PUBLICATION_CSV = open (name + "_" + surname +  str(data) + "_PUBLICATION.csv", "a")
                 for PMID in DizPMID:
                     for record in records:
                         if DizPMID[int(Num)] in record["PMID"]:
