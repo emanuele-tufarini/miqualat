@@ -1,7 +1,7 @@
 #relational table
 #NULL value check and empty for auto-NULL
 
-def relational_table():
+def relational_table(name,surname,data):
     integer_progressive_ID="NULL"
     pubmed_ID=input("enter pubmed_ID (ex 29680643), cannot be NULL (empty): ")
     while pubmed_ID == "" or pubmed_ID.lower() == "null":
@@ -33,12 +33,12 @@ def relational_table():
             if i == "" or i.lower() == "null":
                 i = "NULL"
             i=('"'+i+'"')
-            table_file=open("PUB_GEN_VAR_TEC_TAG.csv","a")
+            table_file=open(name + "_" + surname + "_" +  str(data) + "_PUB_GEN_VAR_TEC_TAG.csv","a")
             table_file.write(integer_progressive_ID+','+pubmed_ID+','+\
                                   ensembl_gene_ID+','+variant_name+','+\
                                   t+','+i+','+relationship_note+'\n')
 
-def relational_table_repeat():
+def relational_table_repeat(name,surname,data):
     repeat=True
     while repeat:
         choice = input("enter yes to continue insertion, or leave empty for exit (file will be saved): ")
@@ -46,12 +46,12 @@ def relational_table_repeat():
             print("\nsee you later!")
             repeat=False
         else:
-            relational_table()  
+            relational_table(name,surname,data)  
 
 #relational table more genes at a time
 
-def relational_table_list_of_gene():
-    table_file=open("PUB_GEN_VAR_TEC_TAG.csv","a")
+def relational_table_list_of_gene(name,surname,data):
+    table_file=open(name + "_" + surname + "_" +  str(data) + "_PUB_GEN_VAR_TEC_TAG.csv","a")
     entry_matrix=[]
     integer_progressive_ID="NULL"
     integer_progressive_ID='"'+integer_progressive_ID+'"'
@@ -101,7 +101,7 @@ def relational_table_list_of_gene():
     
 #tag table
   
-def tag_table():
+def tag_table(name,surname,data):
     keyword_tags=input("enter keyword_tags (ex antioxidants), cannot be NULL (empty): ")
     while keyword_tags == "" or keyword_tags.lower() == "null":
         print ("keyword_tags cannot be NULL retry")
@@ -112,11 +112,11 @@ def tag_table():
         tags_short_description=input("enter tags_short_description (ex prevent or slow damage to cells caused by free radicals), cannot be NULL (empty): ")
     keyword_tags=('"'+keyword_tags+'"') 
     tags_short_description=('"'+tags_short_description+'"')   
-    table_file=open("TAG.csv","a")
+    table_file=open(name + "_" + surname + "_" +  str(data) + "_TAG.csv","a")
     table_file.write(keyword_tags+','+tags_short_description+"\n")
 
 
-def tag_table_repeat():
+def tag_table_repeat(name,surname,data):
     repeat=True
     while repeat:
         choice = input("enter yes to continue insertion, or leave empty for exit (file will be saved): ")
@@ -124,10 +124,10 @@ def tag_table_repeat():
             print("\nsee you later!")
             repeat=False
         else:
-            tag_table()  
+            tag_table(name,surname,data)  
 
 #tecnique table
-def tecnique_table():
+def tecnique_table(name,surname,data):
     tecnique=input("enter tecnique (ex QPCR), cannot be NULL (empty): : ")
     while tecnique == "" or tecnique.lower() == "null":
         print ("tecnique cannot be NULL retry")
@@ -138,10 +138,10 @@ def tecnique_table():
         tecnique_short_description=input("enter tecnique_short_description (ex quantitative polymerase chain reaction), cannot be NULL (empty): ")    
     tecnique='"'+tecnique+'"'    
     tecnique_short_description='"'+tecnique_short_description+'"'    
-    table_file=open("TECNIQUE.csv","a")
+    table_file=open(name + "_" + surname + "_" +  str(data) + "_TECNIQUE.csv","a")
     table_file.write(tecnique+','+tecnique_short_description+"\n")
 
-def tecnique_table_repeat():
+def tecnique_table_repeat(name,surname,data):
     repeat=True
     while repeat:
         choice = input("enter yes to continue insertion, or leave empty for exit (file will be saved): ")
@@ -149,11 +149,11 @@ def tecnique_table_repeat():
             print("\nsee you later!")
             repeat=False
         else:
-            tecnique_table()  
+            tecnique_table(name,surname,data)  
 
 #variant table
 
-def variant_table():
+def variant_table(name,surname,data):
     variant_name=input("enter variant_name, cannot be NULL (empty): ")
     while variant_name == "" or variant_name.lower() == "null":
         print ("variant_name cannot be NULL retry")
@@ -201,11 +201,11 @@ def variant_table():
     species='"'+species+'"'      
     refseq='"'+refseq+'"'
     
-    table_file=open("VARIANT.csv","a")
+    table_file=open(name + "_" + surname + "_" +  str(data) + "_VARIANT.csv","a")
     table_file.write(variant_name+','+variant_type+','+chromosome+','+position+\
                           ','+reference_allele+','+alternative_allele+','+rs_ID+','+species+','+refseq+"\n")
 
-def variant_table_repeat():
+def variant_table_repeat(name,surname,data):
     repeat=True
     while repeat:
         choice = input("enter yes to continue insertion, or leave empty for exit (file will be saved): ")
@@ -213,4 +213,4 @@ def variant_table_repeat():
             print("\nsee you later!")
             repeat=False
         else:
-            variant_table()  
+            variant_table(name,surname,data)  
