@@ -6,7 +6,7 @@ import getpass
 import datetime
 
 #definizione della funzione di export dei dati dal database MIQUALAT#
-def miqualat_db_data_exporter():
+def miqualat_db_data_exporter(host,db,port):
     
     #variabili dove sono allocate le informazioni dell'utente per la personalizzazione dell'output
     print("To customize the output files please enter these credentials: ")
@@ -15,10 +15,10 @@ def miqualat_db_data_exporter():
     
     #variabili richieste come parametri di input all'utente: database username e password#
     user=input("enter your username: ")
-    pswd=getpass.getpass("enter your password: ")
+    passwd=getpass.getpass("enter your password: ")
     
     #CONNESSIONE AL SERVER DOVE È ALLOCATO IL DATABASE#
-    mydb=MySQLdb.connect(host="localhost", user=user, passwd=pswd, db="MIQUALAT")
+    mydb=MySQLdb.connect(host, user, passwd, db, port)
     cursor=mydb.cursor()
     
     #variabile che alloca la data di esecuzione per rinominare il filename di export output#
@@ -163,7 +163,7 @@ def miqualat_db_data_exporter():
                     display(result_df)
                     save_file_selection=input(save_file_string)
                     if(save_file_selection == "yes"):
-                        result_df.to_csv(path_or_buf=save_file_path,sep=",",header=True,index=False,na_rep="NULL")
+                        result_df.to_csv(path_or_buf="./OUTPUT/table_"+table_name+"_query_number_"+str(code)+"_export_data_results_" + str(date.year)+"-"+str(date.month)+"-"+str(date.day)+"_"+str(int(date.hour))+"-"+str(date.minute)+"-"+str(date.second)+".csv",sep=",",header=True,index=False,na_rep="NULL")
                 elif(code == "5"):
                     result_header=[field_dictionary["GENE"][4],"COUNT(genes)"]
                     cursor.execute(gene_queries[code])

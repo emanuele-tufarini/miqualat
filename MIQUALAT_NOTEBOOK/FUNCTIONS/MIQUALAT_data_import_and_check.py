@@ -12,8 +12,8 @@ def string_to_integer_checker(string):
         return(False)
 
 #funzione che effettua l'importazione dei dati nel database MIQUALAT dai file CSV dell'utente#
-def database_importer(host,user,pswd,db,csv_file_path,table_name,field_dictionary):
-    mydb=MySQLdb.connect(host=host, user=user, passwd=pswd, db=db)
+def database_importer(host,user,pswd,db,port,csv_file_path,table_name,field_dictionary):
+    mydb=MySQLdb.connect(host=host, user=user, passwd=pswd, db=db, port=port)
     cursor=mydb.cursor()
     csv_data=csv.reader(open(csv_file_path))
     header=",".join(next(csv_data))
@@ -25,7 +25,7 @@ def database_importer(host,user,pswd,db,csv_file_path,table_name,field_dictionar
     print ("\n"+table_name+" has been successully imported into the database!")
     
 #funzione che effettua il check delle entries presenti nel CSV file dell'utente rispetto ad i record presenti nel database MIQUALAT#
-def database_security_checker(host,user,pswd,db,csv_file_path,table_name):
+def database_security_checker(host,user,pswd,db,port,csv_file_path,table_name):
     
     #variabili locali#
     warning_flag=0
@@ -376,10 +376,10 @@ def database_security_checker(host,user,pswd,db,csv_file_path,table_name):
             
     #controllo dello stato della variabile flag/ se flag == 0 allora non ci sono errori ed avviene l'importazione del csv file sulla tabella del database MIQUALAT#
     if(warning_flag == 0):
-        database_importer(host,user,pswd,db,csv_file_path,table_name,field_dictionary)
+        database_importer(host,user,pswd,db,port,csv_file_path,table_name,field_dictionary)
 
 #funziona che permette di effettuare la selezione delle tabelle e dei dati da importare#
-def database_import_data_selector(file_path):
+def database_import_data_selector(file_path,host,db,port):
     
     #definizione di una variabile locale di tipo dizionario per la selezione dell'input da importare nel database#
     table_dict={
@@ -417,10 +417,10 @@ def database_import_data_selector(file_path):
             if(selection == "0"):
                 for table_name in table_dict[selection]:
                     csv_file_name=input("\nfor table: "+table_name+" enter csv file name: ")
-                    database_security_checker("localhost",username,password,"MIQUALAT",file_path+csv_file_name,table_name)
+                    database_security_checker(host,username,password,db,port,file_path+csv_file_name,table_name)
             else:
                 csv_file_name=input("\nfor table: "+table_dict[selection]+" enter csv file name: ")
-                database_security_checker("localhost",username,password,"MIQUALAT",file_path+csv_file_name,table_dict[selection])
+                database_security_checker(host,username,password,db,port,file_path+csv_file_name,table_dict[selection])
         else:
             print("[WARNING]: the inserted code: "+selection+" is not present in the tables selection menu;")
     else:
@@ -429,9 +429,9 @@ def database_import_data_selector(file_path):
                 if(code == "0"):
                     for table_name in table_dict[code]:
                         csv_file_name=input("\nfor table: "+table_name+" enter csv file name: ")
-                        database_security_checker("localhost",username,password,"MIQUALAT",file_path+csv_file_name,table_name)
+                        database_security_checker(host,username,password,db,port,file_path+csv_file_name,table_name)
                 else:
                     csv_file_name=input("\nfor table: "+table_dict[code]+" enter csv file name: ")
-                    database_security_checker("localhost",username,password,"MIQUALAT",file_path+csv_file_name,table_dict[code])
+                    database_security_checker(host,username,password,db,port,file_path+csv_file_name,table_dict[code])
             else:
                 print("[WARNING]: the inserted code: "+code+" is not present in the tables selection menu;")
