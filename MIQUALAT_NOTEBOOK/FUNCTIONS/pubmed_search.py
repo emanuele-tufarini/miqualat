@@ -111,6 +111,14 @@ def pubmed_search(keyword,keyword_title):
                             JOURNAL = (record["TA"])
                             DATA = (record["DP"][:4]) #yyy/mm/dd
                             URL = ("https://www.ncbi.nlm.nih.gov/pubmed/?term=" + PMID)
+                            try:
+                                AID = ((str(record["AID"]).replace('"', "'")).replace("'", "")) # article identifier
+                                AID = AID.split (",")
+                                DOI = [i for i in AID if "doi" in i]
+                                DOI = (str (DOI)).replace('[doi]', "").replace("[", "").replace("]", "").replace(" ", "").replace("'", "")
+                            except:
+                                DOI = "NULL"
+                                pass
                             # write the results to the PUBLICATION.csv
                             PUBLICATION_CSV.write ('"' + str(PMID) + '","' + str(DOI) + '","' + str (TITLE) + '","' + str(AUTHORS) + '","' + str(JOURNAL) + '","' + str(DATA) + '"\n')
                     break
